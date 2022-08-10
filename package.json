@@ -1,0 +1,16 @@
+{
+  "name": "alive",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dead, bam",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "discord.js": "^14.1.2",
+    "nodemon": "^2.0.19"
+  }
+}
