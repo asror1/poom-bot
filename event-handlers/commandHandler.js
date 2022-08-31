@@ -1,6 +1,7 @@
 const manual = require('../manual.json');
 const { search_api_key: key, cxId: id } = require('../config.json');
 const { default: axios } = require('axios');
+const joke = require('./guildMemberAddHandler');
 module.exports = {
     "!help": () => {
         return manual["!help"];
@@ -21,7 +22,7 @@ module.exports = {
         return formatSearchResult(result, response);
     },
     "default": () => {
-        return 'Command not found :/'
+        return "Command not found :/"
     }
 }
 const fetchResults = async (query) => {

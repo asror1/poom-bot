@@ -1,5 +1,7 @@
 const {rapid_api_key} = require('../config.json');
-module.exports = async (member)=>{
+const {default: axios} = require('axios');
+module.exports = async (member=undefined)=>{
+    if(!member) return;
     const defaultJokes = [
         "Why is Peter Pan always flying? Because he Neverlands.",
         "Which state has the most streets? Rhode Island.",
@@ -10,15 +12,23 @@ module.exports = async (member)=>{
         "I want to make a brief joke, but it’s a little cheesy.",
         "Why did the coach go to the bank? To get his quarterback.",
         "How do celebrities stay cool? They have many fans."];
+    const phrases = [
+        'Listen',
+        'Hear me out',
+        'Check this out'
+    ]
     const url = 'https://geek-jokes.p.rapidapi.com/api?format=json';
     const options = {
-        method: 'GET',
         headers: {
             'X-RapidAPI-Key': rapid_api_key,
             'X-RapidAPI-Host': 'geek-jokes.p.rapidapi.com'
         }
     };
-    let response = await fetch(url, options);
-    let joke = await response.json();
-    member.guild.channels.first().send(`Hey ${member.user.username}! - ${joke?.joke || defaultJokes[Math.round(Math.random()* defaultJokes.length())]} `);
+    try{
+        let response = await axios.get(url, options);
+        response = response.data;
+        member.guild.channels.first().send(`Hey ${member.user.username}, ${phrases[Math.round(Math.random()* phrases.length())]}... ${response?.joke || defaultJokes[Math.round(Math.random()* defaultJokes.length())]} `);
+    } catch(err){
+        console.error(err);
+    }
 }

@@ -1,9 +1,11 @@
 const alive = require('../client');
 const handler = require('./commandHandler');
+
 const CommandType= {
     HELP: "!help",
     PING: "!ping",
-    SEARCH: "!search"
+    SEARCH: "!search",
+    JOKE: "!joke"
 }
 module.exports = async function (message) {
     if(message.author.tag === alive.user.tag) return;
@@ -17,11 +19,11 @@ module.exports = async function (message) {
                 message.reply(handler[command]());
             break;
             case CommandType.SEARCH:
-                const response = await handler[command](rest.join(' '));
-                message.reply(response);
+                const r1 = await handler[command](rest.join(' '));
+                message.reply(r1);
             break;
             default: 
-                message.reply(handler["default"]);
+                message.reply(handler["default"]());
             break;
         }
     }
