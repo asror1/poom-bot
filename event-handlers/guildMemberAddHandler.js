@@ -24,8 +24,9 @@ const greetings = [
     'Hey', 'Howdy', 'Hola', 'Herro', 'Greetings', 'How do you do', 'Yo'
 ];
 const emojis = [
-    '👀', '👅', '👊', '💥', '💯', '🖖', '😎', '😏', '😳', '😹'
+    '🖖','👀', '👅', '👊', '💥', '💯', '😎', '😏', '😳', '😹'
 ];
+
 module.exports = async (member)=>{
     if(!member) return;
     const url = 'https://geek-jokes.p.rapidapi.com/api?format=json';
@@ -50,6 +51,9 @@ const generateMadlib = (id, joke) =>{
     let greeting = greetings[randomIndex(greetings.length)];
     let hook = hooks[randomIndex(hooks.length)];
     joke = joke || defaultJokes[randomIndex(defaultJokes.length)];
+    joke.replaceAll('Chuck Norris', "Danny DeVito");
+    joke.replaceAll('Chuck', "Danny");
+    joke.replaceAll('Norris', "DeVito");
     let emoji = emojis[randomIndex(emojis.length)];
     return `${greeting} <@${id}>! ${hook}... ${joke} ${emoji}`;
 }
