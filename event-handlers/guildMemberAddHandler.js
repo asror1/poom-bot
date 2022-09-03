@@ -51,9 +51,9 @@ const generateMadlib = (id, joke) =>{
     let greeting = greetings[randomIndex(greetings.length)];
     let hook = hooks[randomIndex(hooks.length)];
     joke = joke || defaultJokes[randomIndex(defaultJokes.length)];
-    joke.replaceAll('Chuck Norris', "Danny DeVito");
-    joke.replaceAll('Chuck', "Danny");
-    joke.replaceAll('Norris', "DeVito");
+    joke = joke.replaceAll('Chuck Norris', "Danny DeVito");
+    joke = joke.replaceAll('Chuck', "Danny");
+    joke = joke.replaceAll('Norris', "DeVito");
     let emoji = emojis[randomIndex(emojis.length)];
     return `${greeting} <@${id}>! ${hook}... ${joke} ${emoji}`;
 }
