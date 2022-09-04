@@ -5,7 +5,7 @@ Version - v1.1.0
 - Google search, retrieves the single most relavant result based on query.
 - Greeting of new users, with a joke.
 <hr>
-## Manual
+<strong>Manual</strong><br>
 
 | Command  | Example | Desc. |
 | ------------- | ------------- | ------------ |
