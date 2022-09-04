@@ -6,6 +6,6 @@ Version - v1.1.0
 - Greeting of new users, with a joke.
 <hr>
 <strong>Manual:</strong>
-|Command         |Example                 |Desc                                                          |
-|----------------|------------------------|--------------------------------------------------------------|
-|!search: <query>|!search What is oatmeal?|Fetches the most relavant result on google based on your query|
+| Command          | Example                  | Desc                                                          |
+---------------------------------------------------------------------------------------------------------------
+| !search: <query> | !search What is oatmeal? | Fetches the most relavant result on google based on your query|
