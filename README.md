@@ -1,12 +1,12 @@
 # alive bot
 Version - v1.1.0
 
-<strong>Current Features:</strong>
+### Current Features
 - Google search, retrieves the single most relavant result based on query.
 - Greeting of new users, with a joke.
 <hr>
 
-## Manual
+### Manual
 | Command  | Example | Desc. |
 | ------------- | ------------- | ------------ |
 | !ping  | !ping  | Used to test whether the bot is active |
