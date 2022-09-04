@@ -10,4 +10,4 @@ Version - v1.1.0
 | Command  | Example | Desc. |
 | ------------- | ------------- | ------------ |
 | !ping  | !ping  | Used to test whether the bot is active |
-| !search: <query>  | !search What is oatmeal?  | Fetches the most relavant result on google based on your query |
+| !search: \<query\>  | !search What is oatmeal?  | Fetches the most relavant result on google based on your query |
