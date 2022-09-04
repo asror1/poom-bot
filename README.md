@@ -7,12 +7,7 @@ Version - v1.1.0
 <hr>
 <strong>Manual:</strong>
 
-| First Header  | Second Header | Third Header |
+| Command  | Example | Desc. |
 | ------------- | ------------- | ------------ |
-| Content Cell  | Content Cell  | Content Cell |
-| Content Cell  | Content Cell  | Content Cell |
-
-
-<!-- | Command          | Example                  | Desc                                                          |
----------------------------------------------------------------------------------------------------------------
-| !search: <query> | !search What is oatmeal? | Fetches the most relavant result on google based on your query| -->
+| !ping  | !ping  | Used to test whether the bot is active |
+| !search: <query>  | !search What is oatmeal?  | Fetches the most relavant result on google based on your query |
