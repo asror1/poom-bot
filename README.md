@@ -7,12 +7,12 @@ Version - v1.1.0
 <hr>
 <strong>Manual:</strong>
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| First Header  | Second Header | Third Header |
+| ------------- | ------------- | ------------ |
+| Content Cell  | Content Cell  | Content Cell |
+| Content Cell  | Content Cell  | Content Cell |
 
 
-| Command          | Example                  | Desc                                                          |
+<!-- | Command          | Example                  | Desc                                                          |
 ---------------------------------------------------------------------------------------------------------------
-| !search: <query> | !search What is oatmeal? | Fetches the most relavant result on google based on your query|
+| !search: <query> | !search What is oatmeal? | Fetches the most relavant result on google based on your query| -->
