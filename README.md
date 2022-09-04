@@ -5,8 +5,8 @@ Version - v1.1.0
 - Google search, retrieves the single most relavant result based on query.
 - Greeting of new users, with a joke.
 <hr>
-<strong>Manual</strong><br>
 
+## Manual
 | Command  | Example | Desc. |
 | ------------- | ------------- | ------------ |
 | !ping  | !ping  | Used to test whether the bot is active |
