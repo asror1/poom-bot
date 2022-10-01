@@ -1,6 +1,13 @@
 # alive bot
-<<<<<<< HEAD
-## V-1.0.0
-=======
-## v1.0.0
->>>>>>> 99a3c3855bc751728e0a2050dec4b939ece72ae4
+Version - v1.1.0
+
+### Current Features
+- Google search, retrieves the single most relavant result based on query.
+- Greeting of new users, with a joke.
+<hr>
+
+### Manual
+| Command  | Example | Desc. |
+| ------------- | ------------- | ------------ |
+| !ping  | !ping  | Used to test whether the bot is active |
+| !search: \<query\>  | !search What is oatmeal?  | Fetches the most relavant result on google based on your query |
