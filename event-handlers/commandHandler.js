@@ -1,7 +1,7 @@
 const manual = require('../manual.json');
 const { search_api_key: key, cxId: id } = require('../config.json');
 const { default: axios } = require('axios');
-const joke = require('./guildMemberAddHandler');
+const map = {};
 module.exports = {
     "!help": () => {
         return manual["!help"];
@@ -20,6 +20,17 @@ module.exports = {
         }
         result = result?.data?.items[0] || {};
         return formatSearchResult(result, response);
+    },
+    "!pinboard": (subCommand, args = []) => {
+        switch (subCommand) {
+            case 'put': {
+                map[args[0]] = args[1];
+                return `Stored - Key: ${args[0]}, Value: ${args[1]}`;
+            }
+            case 'get': {
+                return map[args[0]] || "Invalid Key :/";
+            }
+        }
     },
     "default": () => {
         return "Command not found :/"
