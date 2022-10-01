@@ -28,7 +28,7 @@ module.exports = {
                 return `Stored - Key: ${args[0]}, Value: ${args[1]}`;
             }
             case 'get': {
-                return map[args[0]] || "Invalid Key :/";
+                return map[args[0]] || "Invalid Key :2/";
             }
         }
     },
