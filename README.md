@@ -10,8 +10,7 @@ v1.1.0
 ### Manual
 | Command | Aliases | Example | Description |
 | --------| ------- |-------- |------------ |
-| !help \<command\> | !h      | !help ping | Displays the available commands if a \<command\> is not specified
-otherwise displays information about the specified command |
+| !help \<command\> | !h      | !help ping | Displays the available commands if a \<command\> is not specified otherwise displays information about the specified command |
 | !ping   | None    | !ping   | Used to test whether the bot is active |
 | !search: \<query\> | !s | !search What is oatmeal? | Fetches the most relavant result on google, based on your query |
 | !rolldie | !rd | !rolldie | Returns a randm number 1-6 | 
