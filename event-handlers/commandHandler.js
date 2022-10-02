@@ -3,15 +3,21 @@ const { search_api_key: key, cxId: id } = require('../config.json');
 const { default: axios } = require('axios');
 const fs = require('fs');
 const Map = {};
-fs.readFile('./event-handlers/metadata.txt', (err, data) => {
-    if (err) throw err;
-    data.toString().split('\n').forEach(elem => {
-        if (elem && elem.length > 0) {
-            const [k, v] = elem.split(',');
-            Map[k] = v;
-        }
-    })
-})
+(async function init() {
+    try {
+        const contents = await fs.promises.readFile('./event-handlers/metadata.txt');
+        contents.toString().split('\n').forEach(elem => {
+            if (elem && elem.length > 0) {
+                const [k, v] = elem.split(',');
+                Map[k] = v;
+            }
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}())
+console.log(Map);
 module.exports = {
     "!help": () => {
         return manual["!help"];

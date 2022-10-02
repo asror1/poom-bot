@@ -1,5 +1,6 @@
 {
-    "!help": "Displays the currently available commands... \n!search: Search any word/phrase on google",
+    "!help": "Displays the currently available commands.\nGo to (https://github.com/asror1/alive-bot/blob/main/README.md) for thorough manual.\n\n!search: <query>\n!ping\n!rolldie",
     "!ping": "Tests the connection of the bot to the discord server. Usage: !ping. \nExpected Result: pong",
-    "!search": "Search any word/phrase on google. \nUsage: !search <word/phrase>. Expected Result: Most relevant info on searched query"
+    "!rolldie": "Usage: !rolldie. Expected Result: a random number between 1-6",
+    "!search": "Search any word/phrase on google. (Aliases: !s) \nUsage: !search <word/phrase>. Expected Result: Most relevant info on searched query"
 }
