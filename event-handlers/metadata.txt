@@ -1,2 +1,0 @@
-main_repo, https://github.com/alexapineda0904/Whack-A-Prof
-Poot, But

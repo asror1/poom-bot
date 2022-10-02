@@ -1,4 +1,5 @@
 config.json
+metadata.txt
 .vs
 node_modules
 package-lock.json
