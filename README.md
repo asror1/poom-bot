@@ -12,5 +12,5 @@
 | --------| ------- |-------- |------------ |
 | !help \<command\> | !h      | !help ping | Displays the available commands if \<command\> is not specified otherwise displays information about the specified command |
 | !ping   | None    | !ping   | Used to test whether the bot is active |
-| !search: \<query\> | !s | !search What is oatmeal? | Fetches the most relavant result on google, based on your query |
-| !rolldie | !rd | !rolldie | Returns a randm number 1-6 | 
+| !search \<query\> | !s | !search What is oatmeal? | Fetches the most relavant result on google, based on your query |
+| !rolldie | !rd | !rolldie | Rolls an imaginary 6 sided die, returns a random number between 1-6 | 
