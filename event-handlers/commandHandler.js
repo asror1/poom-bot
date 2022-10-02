@@ -96,7 +96,7 @@ module.exports = {
         const [subCommand, key, value] = args;
         switch (subCommand) {
             case 'put': {
-                fs.appendFile(PINBOARD_STORE `\n${key}, ${value}`, err => {
+                fs.appendFile(PINBOARD_STORE,`\n${key}, ${value}`, err => {
                     if (err) throw err;
                 })
                 Map[key] = value;

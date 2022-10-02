@@ -1,5 +1,5 @@
 # alive bot
-**v 1.2.0**
+**v 1.2.1**
 
 ### Current Features
 - Google search, retrieves the single most relavant result based on query.
