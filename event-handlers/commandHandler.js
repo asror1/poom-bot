@@ -1,7 +1,17 @@
 const manual = require('../manual.json');
 const { search_api_key: key, cxId: id } = require('../config.json');
 const { default: axios } = require('axios');
-const map = {};
+const fs = require('fs');
+const Map = {};
+fs.readFile('./event-handlers/metadata.txt', (err, data) => {
+    if (err) throw err;
+    data.toString().split('\n').forEach(elem => {
+        if (elem && elem.length > 0) {
+            const [k, v] = elem.split(',');
+            Map[k] = v;
+        }
+    })
+})
 module.exports = {
     "!help": () => {
         return manual["!help"];
@@ -9,7 +19,8 @@ module.exports = {
     "!ping": () => {
         return "pong!";
     },
-    "!search": async (query) => {
+    "!search": async (args) => {
+        const query = args.join(' ');
         let result;
         let response = `No result found - \"${query}\"`;
         let parsed = query.replaceAll(query[query.search(/^\w\s/g)], " ").replaceAll(" ", "%20");
@@ -21,20 +32,33 @@ module.exports = {
         result = result?.data?.items[0] || {};
         return formatSearchResult(result, response);
     },
-    "!pinboard": (subCommand, args = []) => {
+    "!pinboard": (args) => {
+        const [subCommand, key, value] = args;
         switch (subCommand) {
             case 'put': {
-                map[args[0]] = args[1];
-                return `Stored - Key: ${args[0]}, Value: ${args[1]}`;
+                fs.appendFile('./event-handlers/metadata.txt', `\n${key}, ${value}`, err => {
+                    if (err) throw err;
+                })
+                Map[key] = value;
+                return `Stored - Key: ${key}, Value: ${value}`;
             }
             case 'get': {
-                return map[args[0]] || "Invalid Key :2/";
+                return Map[key] || "Error: Invalid Key :face_with_peeking_eye:";
             }
         }
     },
+    "!rolldie": () => {
+        return `:game_die: **${randInt(1, 6)}** :game_die:`;
+    },
     "default": () => {
-        return "Command not found :/"
+        return "Error: Command not found :face_with_peeking_eye:"
     }
+}
+const randInt = (min, max) => {
+    return Math.round(Math.random() * (max - min) + min);
+}
+const randDouble = (min, max) => {
+    return Math.random() * (max - min) + min;
 }
 const fetchResults = async (query) => {
     const response = await axios.get(

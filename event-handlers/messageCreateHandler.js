@@ -2,34 +2,29 @@ const alive = require('../client');
 const handler = require('./commandHandler');
 
 const CommandType = {
-    HELP: "!help",
-    PING: "!ping",
-    PINBOARD: "!pinboard",
-    SEARCH: "!search",
-    JOKE: "!joke"
+    HELP: ["!help"],
+    PING: ["!ping"],
+    PINBOARD: ["!pinboard"],
+    SEARCH: ["!s", "!search"],
+    ROLLDIE: ["!rolldie"]
 }
-module.exports = async function(message) {
+module.exports = function(message) {
     if (message.author.tag === alive.user.tag) return;
     if (message.content.startsWith("!")) {
         const [command, ...rest] = message.content.split(" ");
-        switch (command) {
-            case CommandType.HELP:
-                message.reply(handler[command]());
-                break;
-            case CommandType.PING:
-                message.reply(handler[command]());
-                break;
-            case CommandType.SEARCH:
-                const r1 = await handler[command](rest.join(' '));
-                message.reply(r1);
-                break;
-            case CommandType.PINBOARD:
-                let [subCommand, ...args] = rest;
-                message.reply(handler[command](subCommand, args));
-                break;
-            default:
-                message.reply(handler["default"]());
-                break;
-        }
+        const commandFound = Object.values(CommandType).reduce(async (_, current) => {
+            try {
+                if (current.includes(command)) {
+                    const reply = await handler[command](rest);
+                    message.reply(reply);
+                    return true;
+                }
+
+            } catch (err) {
+                console.log(err);
+            }
+        })
+        if (!commandFound)
+            message.reply(handler["default"]());
     }
 }
