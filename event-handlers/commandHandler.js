@@ -14,10 +14,11 @@ const manual = require('../manual.json');
 
 // Initializing Variables...
 const COLORS = ["#cb8175", "#e2a97e", "#f0cf8e", "#f6edcd", "#a8c8a6", "#6d8d8a", "#655057"];
+const PINBOARD_STORE = "./event-handlers/metadata.txt";
 const Map = {};
 (async function init() {
     try {
-        const contents = await fs.promises.readFile('./event-handlers/metadata.txt');
+        const contents = await fs.promises.readFile(PINBOARD_STORE);
         contents.toString().split('\n').forEach(elem => {
             if (elem && elem.length > 0) {
                 const [k, v] = elem.split(',');
@@ -95,7 +96,7 @@ module.exports = {
         const [subCommand, key, value] = args;
         switch (subCommand) {
             case 'put': {
-                fs.appendFile('./event-handlers/metadata.txt', `\n${key}, ${value}`, err => {
+                fs.appendFile(PINBOARD_STORE `\n${key}, ${value}`, err => {
                     if (err) throw err;
                 })
                 Map[key] = value;
