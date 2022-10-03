@@ -4,7 +4,7 @@
 ### Current Features
 - Google search, retrieves the single most relavant result based on query.
 - Greeting of new users, with a joke.
-- Roll a number 1-6, like you're playing dice. 
+- Roll a number 1-6, like you're playing cee lo. 
 <hr>
 
 ### Manual
