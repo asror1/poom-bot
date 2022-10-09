@@ -77,18 +77,19 @@ const formatResults = (query, { snippet, link, title }, fallback) => {
 module.exports = {
     "!help": (args) => {
         let [command] = args;
+        const embed = new EmbedBuilder().setColor(randColor());
         if (command) {
             command = command.replaceAll("!", "");
             command = "!" + command;
             return embedWrapper(
-                new EmbedBuilder()
+                embed
                     .setTitle(manual[command]["title"])
                     .setDescription(manual[command]["desc"])
                     .addFields(manual[command]["fields"])
             )
         }
         return embedWrapper(
-            new EmbedBuilder()
+            embed
                 .setTitle(manual["!help"]["title"])
                 .setDescription(manual["!help"]["desc"])
                 .addFields(manual["!help"]["fields"])
