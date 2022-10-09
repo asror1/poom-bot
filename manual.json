@@ -1,6 +1,28 @@
 {
-    "!help": "Displays the currently available commands.\nGo to (https://github.com/asror1/alive-bot/blob/main/README.md) for thorough manual.\n\n!search: <query>\n!ping\n!rolldie",
-    "!ping": "Tests the connection of the bot to the discord server. Usage: !ping. \nExpected Result: pong",
-    "!rolldie": "Usage: !rolldie. Expected Result: a random number between 1-6",
-    "!search": "Search any word/phrase on google. (Aliases: !s) \nUsage: !search <word/phrase>. Expected Result: Most relevant info on searched query"
+    "!help": {
+       "title": "Help Menu ", 
+       "desc": " :chocolate_bar: Displays the currently available commands",
+       "link": "https://github.com/asror1/alive-bot/blob/main/README.md", 
+        "fields": [ 
+            { "name": "!help", "value": "<command?>" },
+            { "name": "!search", "value": "<query>" },
+            { "name": "!rolldie", "value": "<number_of_dice>" }
+        ]
+    },
+    "!rolldie": { 
+       "title": "Roll Dice", 
+       "desc": ":game_die: Returns a random number, based on the number of (6 sided) dice used",
+      "fields":  [ 
+          { "name": "Usage", "value": "!rolldie <number_of_dice> *Default is 1*" },
+          { "name": "Aliases", "value": "!rd" } 
+      ] 
+    },
+    "!search": { 
+        "title": "Google Search",
+       "desc": ":mag: Retrieves the most relavant result on google.", 
+      "fields": [ 
+          { "name": "Usage", "value": "!search <word/phrase>" },
+          { "name": "Aliases", "value": "!s" }
+      ] 
+    }
 }

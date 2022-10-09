@@ -6,7 +6,7 @@
 // id - search engine id for making requests to custom search engine
 // manual - manual to bot commands
 
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Embed } = require('discord.js');
 const { default: axios } = require('axios');
 const fs = require('fs');
 const { search_api_key: key, cxId: id } = require('../config.json');
@@ -47,7 +47,7 @@ const fetchResults = async (query) => {
 }
 const formatResults = (query, { snippet, link, title }, fallback) => {
     const embed = new EmbedBuilder()
-        .setTitle("Google Search")
+        .setTitle("Search Result")
         .setColor(randColor())
         .setDescription(query)
         .setThumbnail("https://w7.pngwing.com/pngs/249/19/png-transparent-google-logo-g-suite-google-guava-google-plus-company-text-logo.png")
@@ -75,11 +75,25 @@ const formatResults = (query, { snippet, link, title }, fallback) => {
 
 // Main export, command handler.
 module.exports = {
-    "!help": () => {
-        return manual["!help"];
-    },
-    "!ping": () => {
-        return "pong!";
+    "!help": (args) => {
+        let [command] = args;
+        if (command) {
+            command = command.replaceAll("!", "");
+            command = "!" + command;
+            return embedWrapper(
+                new EmbedBuilder()
+                    .setTitle(manual[command]["title"])
+                    .setDescription(manual[command]["desc"])
+                    .addFields(manual[command]["fields"])
+            )
+        }
+        return embedWrapper(
+            new EmbedBuilder()
+                .setTitle(manual["!help"]["title"])
+                .setDescription(manual["!help"]["desc"])
+                .addFields(manual["!help"]["fields"])
+                .setURL(manual["!help"]["link"])
+        )
     },
     "!search": async (args) => {
         try {
@@ -96,7 +110,7 @@ module.exports = {
         const [subCommand, key, value] = args;
         switch (subCommand) {
             case 'put': {
-                fs.appendFile(PINBOARD_STORE,`\n${key}, ${value}`, err => {
+                fs.appendFile(PINBOARD_STORE, `\n${key}, ${value}`, err => {
                     if (err) throw err;
                 })
                 Map[key] = value;
@@ -113,7 +127,7 @@ module.exports = {
                 .setColor(randColor())
                 .addFields({
                     name: "*You rolled a...*",
-                    value: `:game_die: **${randInt(2, 6)}** :game_die:`
+                    value: `:game_die: **${randInt(1, 6)}** :game_die:`
                 })
                 .setThumbnail("https://cdn.dribbble.com/users/6059148/screenshots/14425859/media/3f67e0e620f3818a68a03fdb874b7a56.gif")
         )
