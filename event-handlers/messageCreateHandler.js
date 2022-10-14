@@ -1,36 +1,18 @@
 const alive = require('../client');
-const handler = require('./commandHandler');
+const handler = require('./bang-commands/commandHandler');
+const CommandType = require('./bang-commands/CommandType.json');
 
-// Supported commands, the fullest command must go at the end of their array.
-const CommandType = {
-    HELP: ["!h", "!help"],
-    PINBOARD: ["!pb, !pinboard"],
-    SEARCH: ["!s", "!search"],
-    ROLLDIE: ["!rd", "!rolldie"]
-}
-module.exports = function(message) {
+module.exports = async function(message) {
     if (message.author.tag === alive.user.tag) return;
     if (message.content.startsWith("!")) {
         const [command, ...rest] = message.content.split(" ");
-        const found = Object.values(CommandType).reduce(async (prev, current) => {
-            try {
-                let reply = {};
-                if (Array.isArray(prev) && prev.includes(command)) {
-                    reply = await handler[prev[prev.length - 1]](rest);
-                    message.reply(reply);
-                    return true;
-                }
-                else if (Array.isArray(current) && current.includes(command)) {
-                    reply = await handler[current[current.length - 1]](rest);
-                    message.reply(reply);
-                    return true;
-                }
-
-            } catch (err) {
-                console.log(err);
-            }
-        })
-        if (!found)
+        let c = Object.values(CommandType).find(elem => elem.includes(command));
+        if (!c) {
             message.reply(handler["default"]());
+        }
+        else {
+            let reply = await handler[c.at(-1)](rest);
+            message.reply(reply);
+        }
     }
 }

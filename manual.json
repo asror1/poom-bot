@@ -1,7 +1,7 @@
 {
     "!help": {
        "title": "Help Menu ", 
-       "desc": " :chocolate_bar: Displays the currently available commands",
+       "desc": "Displays the currently available commands",
        "link": "https://github.com/asror1/alive-bot/blob/main/README.md", 
         "fields": [ 
             { "name": "!help", "value": "<command?>" },
@@ -11,7 +11,7 @@
     },
     "!rolldie": { 
        "title": "Roll Dice", 
-       "desc": ":game_die: Returns a random number, based on the number of (6 sided) dice used",
+       "desc": "Returns a random number, based on the number of (6 sided) dice used",
       "fields":  [ 
           { "name": "Usage", "value": "!rolldie <number_of_dice> *Default is 1*" },
           { "name": "Aliases", "value": "!rd" } 
@@ -19,7 +19,7 @@
     },
     "!search": { 
         "title": "Google Search",
-       "desc": ":mag: Retrieves the most relavant result on google.", 
+       "desc": "Retrieves the most relavant result on google.", 
       "fields": [ 
           { "name": "Usage", "value": "!search <word/phrase>" },
           { "name": "Aliases", "value": "!s" }

@@ -1,0 +1,6 @@
+{  
+    "HELP": ["!h", "!help"],
+    "PINBOARD": ["!pb, !pinboard"],
+    "SEARCH": ["!s", "!search"],
+    "ROLLDIE": ["!rd", "!rolldie"]
+}

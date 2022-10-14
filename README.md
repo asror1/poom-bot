@@ -1,5 +1,5 @@
 # alive bot
-**v 1.2.1**
+**v 1.3.1**
 
 ### Current Features
 - Google search, retrieves the single most relavant result based on query.
@@ -11,6 +11,5 @@
 | Command | Aliases | Example | Description |
 | --------| ------- |-------- |------------ |
 | !help \<command\> | !h      | !help ping | Displays the available commands if \<command\> is not specified otherwise displays information about the specified command |
-| !ping   | None    | !ping   | Used to test whether the bot is active |
 | !search \<query\> | !s | !search What is oatmeal? | Fetches the most relavant result on google, based on your query |
 | !rolldie | !rd | !rolldie | Rolls an imaginary 6 sided dice, returns a random number between 1-6 | 
