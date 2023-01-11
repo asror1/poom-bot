@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 Enigma Bot 
 **v 2.0.0**
-=======
-# alive bot
-**v 1.3.2**
->>>>>>> 17e67f5aaeea1e599f424f09d0f36124f566ceea
 
 ### Current Features
 - Google search, retrieves the single most relevant result based on query.
