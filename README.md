@@ -1,4 +1,5 @@
-Enigma Bot 
+# Enigma Bot 
+
 **v 2.0.0**
 
 ### Current Features
