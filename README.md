@@ -1,7 +1,5 @@
 # Enigma Bot 
 
-**v 2.0.0**
-
 ### Current Features
 - Google search, retrieves the single most relevant result based on query.
 - Greeting of new users, with a Danny DeVito joke/statement.

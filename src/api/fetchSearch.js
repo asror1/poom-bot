@@ -8,5 +8,15 @@ module.exports = async (query) => {
         + `gl=us&`
         + `num=2&`
         + `q=${query}`;
-    return await axios.get(url, { headers: { "Accept": "application/json" } })
+    const options = {
+        headers: { "Accept": "application/json" }
+    }
+    let response
+    try {
+        response = await axios.get(url, options)
+    }
+    catch (err) {
+        console.error(err);
+    }
+    return response
 }
