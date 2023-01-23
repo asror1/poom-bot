@@ -16,26 +16,24 @@ module.exports = {
         )
         .setDescription('Search a word/phrase on Google!'),
     async execute(interaction) {
+        // Declaration and definition of variables used in the command
+        let respond = async (embed) => { await interaction.reply({ embeds: [embed] }) },
+            query = interaction.options.getString('query')
         try {
+            // ** Fetch the result for the indicated query on google search ** 
+            let result = await fetchQuery(query.replaceAll(/\s/g, "%20"))
+            result = result?.data?.items[0] || {}
 
-            let query = interaction.options.getString('query'),
-                response
-            if (!query) {
-                response = { embeds: [new ErrorEmbed(ErrorType.InvalidInput, `No query inputted`)] }
-            }
-            else {
-                let result = await fetchQuery(query.replaceAll(/\s/g, "%20"))
-                result = result?.data?.items[0] || {}
-                if (!result.snippet || !result.link)
-                    response = { embeds: [new ErrorEmbed(ErrorType.InvalidResult, `Unable to retrieve any result with the specified query: ${query}`)] }
-                else
-                    response = { embeds: [new QueryEmbed(query, new QueryResult(result.title, result.link, result.snippet))] }
+            // ** Check to see if the query produced a result **
+            if (!result.snippet || !result.link)
+                return await respond(new ErrorEmbed(ErrorType.InvalidResult, `Unable to retrieve any result with the specified query: ${query}`))
 
-            }
-            await interaction.reply(response)
+            // ** Respond with the result that was retrieve from google search **
+            return await respond(new QueryEmbed(query, new QueryResult(result.title, result.link, result.snippet)))
         }
         catch (err) {
             console.error(err)
+            return await respond(new ErrorEmbed(ErrorType.Unexpected, "Most likely not your fault, to report the error, please head over to https://github.com/asror1/enigma-bot/issues and submit an issue."))
         }
     }
 }

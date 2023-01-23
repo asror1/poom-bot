@@ -6,7 +6,7 @@ class DefaultEmbed {
         }
         else {
             if (title) this.title = title
-            this.color = randomColor()
+            this.color = 0x6d8d8a
             this.description = message
         }
     }

@@ -4,5 +4,6 @@ module.exports = {
     InsufficientPermission: "403 Insufficient Permission",
     MissingInput: "400 Missing Input",
     UnsupportedCommand: "400 Unsupported Command",
-    LimitExceeded: "413 Limit Exceeded / Payload Too Large"
+    LimitExceeded: "413 Limit Exceeded / Payload Too Large",
+    Unexpected: "500 Server Error"
 }

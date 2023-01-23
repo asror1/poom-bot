@@ -18,7 +18,7 @@ for (const file of commandFiles) {
         enigma.commands.set(command.data.name, command);
     }
     else {
-        console.log(`[Error] The command at ${filePath} is missing a required "data" or "execute" property.`);
+        console.log(`[Warning] The command at ${filePath} is missing a required "data" or "execute" property.`);
     }
 }
 
