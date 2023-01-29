@@ -1,5 +1,4 @@
 const { SlashCommandBuilder, PermissionsBitField } = require('discord.js')
-const DefaultEmbed = require('../embeds/DefaultEmbed')
 const ErrorEmbed = require('../embeds/ErrorEmbed')
 const ErrorType = require('../util/ErrorType')
 module.exports = {
@@ -23,7 +22,6 @@ module.exports = {
             channel.setParent(parentChannel)
             // ** Delete the intented channel, thus removing all the messages **
             interaction.channel.delete("Chat Reset")
-            return await respond(new DefaultEmbed("Success", "Successfully deleted channel messages"))
         }
         catch (err) {
             console.error(err);

@@ -1,5 +1,6 @@
 const { Events, ChannelType } = require('discord.js')
-const Greetor = require('../util/Greetor')
+const greetMember = require('../util/greetMember')
+const fetchJoke = require('../api/fetchJoke')
 
 module.exports = {
     name: Events.GuildMemberAdd,
@@ -10,7 +11,8 @@ module.exports = {
         }
         try {
             // ** Fetch nerdy jokes api for a joke ** 
-            let joke = await fetchJoke()?.data?.joke;
+            let res = await fetchJoke()
+            joke = await res?.data?.joke
 
             // Define variables needed for handler
             let guild = member.guild,
@@ -23,7 +25,7 @@ module.exports = {
                 console.log(`Using random channel to send welcome message for ( ${guild.name} | ${guild.id} )`);
                 channel = channels.find(elem => elem.type === ChannelType.GuildText)
             }
-            channel.send(Greetor.greet(member.user.id, joke));
+            channel.send(greetMember(member.user.id, joke));
         }
         catch (err) {
             console.error(err);

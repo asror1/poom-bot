@@ -5,5 +5,5 @@ module.exports = {
     MissingInput: "400 Missing Input",
     UnsupportedCommand: "400 Unsupported Command",
     LimitExceeded: "413 Limit Exceeded / Payload Too Large",
-    Unexpected: "500 Server Error"
+    Unexpected: "500 Server-Side"
 }
