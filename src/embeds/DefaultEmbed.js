@@ -1,4 +1,9 @@
 const { randomColor } = require('../util/random')
+/** 
+*    Default embed to be used by the bot  
+*    @param {string} title - The title of the embed 
+*    @param {string} message - Messages to be sent in the embed
+*/
 class DefaultEmbed {
     constructor(title, message) {
         if (!message) {
