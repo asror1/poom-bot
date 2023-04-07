@@ -1,4 +1,5 @@
 const { randomColor, randomInt } = require('../util/random')
+// TODO: Convert to use EnigmaBot class
 const { die, dice } = require('./images.json')
 const numbers = require('./numbers.json')
 class DiceEmbed {

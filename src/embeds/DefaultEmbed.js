@@ -1,4 +1,3 @@
-const { randomColor } = require('../util/random')
 /** 
 *    Default embed to be used by the bot  
 *    @param {string} title - The title of the embed 

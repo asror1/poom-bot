@@ -1,4 +1,5 @@
 const { query: queryImg } = require('./images.json')
+// TODO: Convert to use EnigmaBot class
 const { randomColor } = require('../util/random')
 
 class QueryEmbed {

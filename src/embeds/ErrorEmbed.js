@@ -1,3 +1,4 @@
+// TODO: Convert to use EnigmaBot class
 const { randomColor } = require('../util/random')
 
 class ErrorEmbed {
