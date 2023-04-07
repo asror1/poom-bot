@@ -1,4 +1,4 @@
-![enigma](./src/media/banner1.gif)
+![enigma](./media/banner1.gif)
 
 ### Features
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1680897796522" clover="3.2.0">
+  <project timestamp="1680897796522" name="All files">
+    <metrics statements="40" coveredstatements="17" conditionals="6" coveredconditionals="0" methods="8" coveredmethods="3" elements="54" coveredelements="20" complexity="0" loc="40" ncloc="40" packages="1" files="1" classes="1"/>
+    <file name="EnigmaBot.js" path="C:\Users\Asror\Desktop\projects\enigma-bot\src\util\EnigmaBot.js">
+      <metrics statements="40" coveredstatements="17" conditionals="6" coveredconditionals="0" methods="8" coveredmethods="3"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="4" count="3" type="stmt"/>
+      <line num="13" count="3" type="stmt"/>
+      <line num="24" count="3" type="stmt"/>
+      <line num="33" count="3" type="stmt"/>
+      <line num="42" count="3" type="stmt"/>
+      <line num="64" count="103" type="stmt"/>
+      <line num="66" count="3" type="stmt"/>
+      <line num="67" count="0" type="stmt"/>
+      <line num="68" count="0" type="stmt"/>
+      <line num="69" count="0" type="stmt"/>
+      <line num="71" count="0" type="stmt"/>
+      <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="76" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="77" count="0" type="stmt"/>
+      <line num="78" count="0" type="stmt"/>
+      <line num="79" count="0" type="stmt"/>
+      <line num="80" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="81" count="0" type="stmt"/>
+      <line num="82" count="0" type="stmt"/>
+      <line num="85" count="0" type="stmt"/>
+      <line num="88" count="0" type="stmt"/>
+      <line num="99" count="3" type="stmt"/>
+      <line num="112" count="3" type="stmt"/>
+      <line num="113" count="0" type="stmt"/>
+      <line num="114" count="0" type="stmt"/>
+      <line num="115" count="0" type="stmt"/>
+      <line num="117" count="0" type="stmt"/>
+      <line num="129" count="3" type="stmt"/>
+      <line num="130" count="0" type="stmt"/>
+      <line num="131" count="0" type="stmt"/>
+      <line num="132" count="0" type="stmt"/>
+      <line num="133" count="0" type="stmt"/>
+      <line num="135" count="0" type="stmt"/>
+      <line num="138" count="3" type="stmt"/>
+      <line num="139" count="3" type="stmt"/>
+      <line num="140" count="3" type="stmt"/>
+      <line num="141" count="3" type="stmt"/>
+      <line num="142" count="3" type="stmt"/>
+      <line num="145" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
