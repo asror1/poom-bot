@@ -1,20 +1,20 @@
-<img src="./media/banner1.png" alt="banner" height="450">
+<img src="./media/banner1.png" alt="banner" height="250">
 <hr>
 
 ### Features
 
-    **Search**
+**Search**
 - Google search, retrieves the single most relevant result based on query.
 <img src="./media/search_ss.png" alt="search command screenshot" width="270" height="260">
 
-    **Entertainment**
+**Entertainment**
 - Greeting of new users, with a random Danny DeVito joke.
 - Roll a random number based the number of 6 sided die thrown. 
     Limit is 5 die.
 <img src="./media/rolldie_ss.png" alt="rolldie command screenshot" width="240" height="250">
 
 
-    **Administrative**
+**Administrative**
 - Kick all users at once 
 - Send a message as *enigma*
 - Clear all messages of a channel
