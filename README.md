@@ -5,7 +5,7 @@
 
 **Search**
 - Google search, retrieves the single most relevant result based on query.
-<img src="./media/search_ss.png" alt="search command screenshot" width="270" height="260">
+<img src="./media/search_ss.png" alt="search command screenshot" width="320" height="260">
 
 **Entertainment**
 - Greeting of new users, with a random Danny DeVito joke.
