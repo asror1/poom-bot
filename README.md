@@ -1,13 +1,17 @@
-![enigma](./media/banner1.gif)
+![enigma](./media/banner1.png)
+
 
 ### Features
 
 **Search**
 - Google search, retrieves the single most relevant result based on query.
+![search](./media/search_ss.png)
 
 **Entertainment**
 - Greeting of new users, with a random Danny DeVito joke.
 - Roll a random number based the number of 6 sided die thrown. 
+![rolldie](./media/rolldie_ss.png)
+
 Limit is 5 die.
 
 **Administrative**
