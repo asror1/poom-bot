@@ -1,4 +1,4 @@
-<img src="./media/banner1.png" alt="banner" height="250">
+<img src="./media/banner1.png" alt="banner" height="400">
 <hr>
 
 ### Features
