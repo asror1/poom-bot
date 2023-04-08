@@ -1,17 +1,17 @@
-![enigma](./media/banner1.png)
+<img src="./media/banner1.png" alt="banner" width="500" height="350">
 <hr>
 
 ### Features
 
     **Search**
 - Google search, retrieves the single most relevant result based on query.
-<img src="./media/search_ss.png" alt="search command screenshot" width="70" height="60">
+<img src="./media/search_ss.png" alt="search command screenshot" width="170" height="160">
 
     **Entertainment**
 - Greeting of new users, with a random Danny DeVito joke.
 - Roll a random number based the number of 6 sided die thrown. 
     Limit is 5 die.
-<img src="./media/rolldie_ss.png" alt="rolldie command screenshot" width="40" height="50">
+<img src="./media/rolldie_ss.png" alt="rolldie command screenshot" width="140" height="150">
 
 
     **Administrative**
