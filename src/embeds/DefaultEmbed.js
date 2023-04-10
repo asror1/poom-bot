@@ -3,6 +3,7 @@
 *    @param {string} title - The title of the embed 
 *    @param {string} message - Messages to be sent in the embed
 */
+// TODO: Refactor to extend the @discordjs/builders MessageEmbed class
 class DefaultEmbed {
     constructor(title, message) {
         if (!message) {

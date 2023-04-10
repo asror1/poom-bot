@@ -1,6 +1,4 @@
-// TODO: Convert to use EnigmaBot class
-const { randomColor } = require('../util/random')
-
+// TODO: Convert to extend the @discordjs/builders MessageEmbed class
 class ErrorEmbed {
     constructor(type, message) {
         this.title = `${type} Error`

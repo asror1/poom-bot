@@ -4,7 +4,7 @@
     "description": "Swiss Army Knife of Discord Bots. Provides basic yet useful utility. Settle disputes with your fellow guild-mates with a random Dice Roll or provide them with Google Search fact to squash their argument! Perfect for any discord server +.+",
     "main": "index.js",
     "scripts": {
-        "test": "jest --watch --coverage --verbose false"
+        "test": "jest --watch --coverage --verbose"
     },
     "author": "Asror",
     "license": "ISC",
