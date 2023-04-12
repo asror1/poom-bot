@@ -6,17 +6,16 @@ module.exports = async (query) => {
         + `cx=${id}&`
         + `key=${key}&`
         + `gl=us&`
-        + `num=2&`
-        + `q=${query}`;
+        + `num=1&`
+        + `q=${query.replaceAll(/\s/g, "%20")}`;
     const options = {
         headers: { "Accept": "application/json" }
     }
-    let response
     try {
-        response = await axios.get(url, options)
+        const response = await axios.get(url, options)
+        return response?.data?.items[0];
     }
     catch (err) {
         console.error(err);
     }
-    return response
 }

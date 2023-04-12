@@ -8,7 +8,10 @@ module.exports = async () => {
         }
     }
     try {
-        return await axios.get(url, options);
+
+        const response = await axios.get(url, options);
+        return response?.data?.joke;
+
     } catch (err) {
         console.error(err);
     }
