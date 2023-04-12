@@ -19,7 +19,7 @@ getRandomInt = (min, max) => Math.floor(Math.random() * (max - min) + min)
 * 
 * @example getRandomValue([1, 2, 3]) // returns any one of the values from the given array
 */
-getRandomValue = (arr) => arr[getRandomInt(0, arr.length)]
+getRandomValue = (arr = []) => arr[getRandomInt(0, arr.length)]
 
 module.exports = {
     getRandomInt: getRandomInt,

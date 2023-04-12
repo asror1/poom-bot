@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js')
-const fetchQuery = require('../api/fetchSearch');
+const { gooleSearch } = require('../axios');
 const QueryEmbed = require('../embeds/QueryEmbed');
 const QueryResult = require('../util/QueryResult');
 const ErrorEmbed = require('../embeds/ErrorEmbed')
@@ -21,19 +21,36 @@ module.exports = {
             query = interaction.options.getString('query')
         try {
             // ** Fetch the result for the indicated query on google search ** 
-            let result = await fetchQuery(query.replaceAll(/\s/g, "%20"))
-            result = result?.data?.items[0] || {}
+            let result = await gooleSearch(query.replaceAll(/\s/g, "%20"))
 
-            // ** Check to see if the query produced a result **
-            if (!result.snippet || !result.link)
-                return await respond(new ErrorEmbed(ErrorType.InvalidResult, `Unable to retrieve any result with the specified query: ${query}`))
-
-            // ** Respond with the result that was retrieve from google search **
-            return await respond(new QueryEmbed(query, new QueryResult(result.title, result.link, result.snippet)))
+            if (!result) {
+                return await respond(
+                    new ErrorEmbed(
+                        ErrorType.InvalidResult,
+                        `Unable to retrieve any result with the specified query: ${query}`
+                    )
+                )
+            }
+            // ** Respond with the result that was retrieved from google search **
+            return await respond(
+                new QueryEmbed(
+                    query,
+                    new QueryResult(
+                        result.title,
+                        result.link,
+                        result.snippet
+                    )
+                )
+            )
         }
         catch (err) {
             console.error(err)
-            return await respond(new ErrorEmbed(ErrorType.Unexpected, "Most likely not your fault, to report the error, please head over to https://github.com/asror1/enigma-bot/issues and submit an issue."))
+            return await respond(
+                new ErrorEmbed(
+                    ErrorType.Unexpected,
+                    "Most likely not your fault, to report the error, please head over to https://github.com/asror1/enigma-bot/issues"
+                )
+            )
         }
     }
 }
