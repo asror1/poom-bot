@@ -1,5 +1,5 @@
 const { default: axios } = require('axios')
-const { geekJoke } = require('../src/axios')
+const { geekJoke } = require('../axios')
 
 jest.mock('axios')
 

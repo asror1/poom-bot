@@ -1,6 +1,6 @@
-const { getRandomValue, getRandomInt } = require('../src/random');
+const { getRandomValue, getRandomInt } = require('../random');
 
-describe.skip("random module test", () => {
+describe("random module test", () => {
     it('should be able to generate a random integer in the range 1-6', () => {
         const iterations = 100
         let equalCounter = 0

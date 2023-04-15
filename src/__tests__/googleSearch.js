@@ -1,5 +1,5 @@
 const { default: axios } = require('axios')
-const { googleSearch } = require('../src/axios')
+const { googleSearch } = require('../axios')
 
 jest.mock('axios')
 
