@@ -1,4 +1,4 @@
-![Banner]('./media/exported/text_banner.jpeg')
+![Banner]('media/exported/text_banner.jpeg')
 <hr>
 
 ## Features
