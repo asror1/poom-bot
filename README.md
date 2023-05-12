@@ -1,25 +1,29 @@
-<img src="./media/banner1.png" alt="banner" height="400">
+![Banner](media/exported/text_banner.jpeg)
 <hr>
 
-### Features
+## Features
 
 **Search**
 - Google search, retrieves the single most relevant result based on query.
-<img src="./media/search_ss.png" alt="search command screenshot" width="320" height="260">
+<details>
+    <summary>Screenshots</summary>
+    <img src="./media/screenshots/search.png" alt="search command screenshot" width="320" height="260">
+</details>
 
 **Entertainment**
 - Greeting of new users, with a random Danny DeVito joke.
-- Roll a random number based the number of 6 sided die thrown. 
-    Limit is 5 die.
-<img src="./media/rolldie_ss.png" alt="rolldie command screenshot" width="240" height="250">
-
+- Roll a random number based the number of 6 sided die thrown. Limit is 5 die.
+<details>
+    <summary>Screenshots</summary>
+    <img src="./media/screenshots/rolldie.png" alt="rolldie command screenshot" width="240" height="250">
+</details>
 
 **Administrative**
 - Kick all users at once 
 - Send a message as *enigma*
 - Clear all messages of a channel
 
-### Manual
+## Manual
 | Slash Command | Parameters | Example | Description |
 | :--: | :-- | :-- | :-- |
 | /search | query - Word or phrase to search (required) | /search query:What is oatmeal? | Fetches the most relevant result on google, based on your query |
