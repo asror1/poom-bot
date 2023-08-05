@@ -1,0 +1,18 @@
+# IDE 
+.vs
+Session.vim
+
+# Node.js runtime environment
+node_modules/
+package-lock.json
+
+# Artwork
+*.aseprite
+*.pur
+
+# Testing
+coverage/
+
+# Private
+config.json
+.env

@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "rootDir": "./src/",
+    "outDir": "./dist/",
+    "strict": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "sourceMap": false,
+    "baseUrl": ".",
+    "paths": {
+      "@listeners/*": [
+        "./src/listeners/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@commands/*": [
+        "./src/commands/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ]
+    }
+  },
+  "files": [
+    "src/Bot.ts"
+  ],
+  "include": [
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
