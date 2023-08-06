@@ -13,34 +13,18 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "sourceMap": false,
     "baseUrl": ".",
     "paths": {
-      "@listeners/*": [
-        "./src/listeners/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@commands/*": [
-        "./src/commands/*"
-      ],
-      "@interfaces/*": [
-        "./src/interfaces/*"
-      ]
+      "@listeners/*": ["./src/listeners/*"],
+      "@data/*": ["./src/data/*"],
+      "@components/*": ["./src/components/*"],
+      "@commands/*": ["./src/commands/*"],
+      "@interfaces/*": ["./src/interfaces/*"]
     }
   },
-  "files": [
-    "src/Bot.ts"
-  ],
-  "include": [
-    "./**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "files": ["src/Bot.ts"],
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
