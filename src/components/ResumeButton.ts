@@ -2,24 +2,24 @@ import { Session } from "@interfaces/Session";
 import { SlashCommandButton } from "@interfaces/SlashCommandButton";
 import { ButtonStyle, ComponentType, EmbedBuilder } from "discord.js";
 
-export const FinishButton: SlashCommandButton = {
-  custom_id: "finish",
-  label: "Finish",
+export const ResumeButton: SlashCommandButton = {
+  custom_id: "resume",
+  label: "Resume",
   type: ComponentType.Button,
   emoji: {
-    name: "🏁"
+    name: "▶️"
   },
-  style: ButtonStyle.Primary,
+  style: ButtonStyle.Secondary,
   execute: (session: Session) => {
     clearInterval(session.intervalId);
     const embed = new EmbedBuilder()
       .setFields([
         {
-          name: "Another successful work session!",
-          value: "...right? 🤔 Here's a cookie for you 🍪"
+          name: "Resume session",
+          value: "Get back on your grind!"
         }
       ])
-      .setColor(0xe8c170);
+      .setColor(0x7A4841);
 
     session.interaction.editReply({
       components: [],
