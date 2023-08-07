@@ -1,100 +1,52 @@
-import {
-  CommandInteraction,
-  APIActionRowComponentTypes,
-  Interaction,
-  Client,
-  EmbedBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  APIActionRowComponent,
-  APIMessageActionRowComponent,
-  ComponentType
-} from "discord.js";
+import { CommandInteraction, Client } from "discord.js";
 import { Session } from "@interfaces/Session";
-import FinishButton from "@components/FinishButton";
+import { WorkTimer, BreakTimer } from "@components/index";
 import { SlashCommand } from "@interfaces/SlashCommand";
+import { SessionStore } from "@data/SessionStore";
 
-const setWorkInterval = (embed: EmbedBuilder, workInterval: number): EmbedBuilder => {
-  if (workInterval > 60) {
-    throw new Error(
-      "Work interval must be in minutes, not seconds or milliseconds. Work interval also cannot be more than an hour"
-    );
-  }
-  return embed
-    .setFields({
-      name: "Pomodoro Session Started!",
-      value: `ᶘ ◕ᴥ◕ᶅ [${workInterval}:00] minutes on the clock`
-    })
-    .setImage(`attachment://poom${workInterval}.png`);
-};
+const DEFAULT_WORK_DURATION: number = 5;
+const DEFAULT_BREAK_DURATION: number = 3;
+const DEFAULT_WORK_UPDATE_DURATION: number = 1;
+const DEFAULT_BREAK_UPDATE_DURATION: number = 1;
 const minutesToMilliseconds = (minutes: number): number => minutes * 60 * 1000;
-const millisecondsToMinutes = (milliseconds: number): number => milliseconds / 60 / 1000;
 export const Start: SlashCommand = {
   name: "start",
   description: "Start pomodoro session",
-  execute: async (client: Client, interaction: CommandInteraction) => {
-    const session: Session = {
-      owner: interaction.user.id,
-      members: null,
-      guild: interaction.guildId,
-      interaction: interaction.id,
-      workInterval: minutesToMilliseconds(25),
-      breakInterval: minutesToMilliseconds(5)
-    };
-    const embed: EmbedBuilder = new EmbedBuilder().setColor(0xe8c170);
-    const pause: ButtonBuilder = new ButtonBuilder()
-      .setCustomId("pause")
-      .setLabel("Pause")
-      .setEmoji("✋")
-      .setStyle(ButtonStyle.Secondary);
-    const row: APIActionRowComponent<APIMessageActionRowComponent> = {
-      components: [FinishButton],
-      type: ComponentType.ActionRow
-    };
-    let minutes = millisecondsToMinutes(session.workInterval);
-    await interaction.reply({
-      components: [row],
-      ephemeral: true,
-      embeds: [setWorkInterval(embed, minutes)],
-      files: [`media\\exported\\poom${minutes}.png`]
-    });
-    const updateInterval: number = minutesToMilliseconds(1);
-    const finishSession = (session: Session): void => {
-      clearInterval(intervalId);
-      embed
-        .setFields([
-          {
-            name: "Another successful work session! (...right? 🤔)",
-            value: "Here's a cookie for you 🍪"
+  execute: async (_client: Client, interaction: CommandInteraction) => {
+    let workRemaining: number = DEFAULT_WORK_DURATION;
+    let workUpdate: number = minutesToMilliseconds(DEFAULT_WORK_UPDATE_DURATION);
+
+    await interaction.reply(WorkTimer.render(workRemaining));
+
+    const workId: any = setInterval(async () => {
+      workRemaining = workRemaining - DEFAULT_WORK_UPDATE_DURATION;
+      console.log(workRemaining);
+      if (workRemaining === 0) {
+        workUpdate = minutesToMilliseconds(DEFAULT_BREAK_DURATION);
+        let breakRemaining: number = DEFAULT_BREAK_DURATION;
+        const breakUpdate: number = minutesToMilliseconds(DEFAULT_BREAK_UPDATE_DURATION);
+        const breakId = setInterval(async () => {
+          breakRemaining = breakRemaining - DEFAULT_BREAK_UPDATE_DURATION;
+          if (breakRemaining === 0) {
+            workUpdate = minutesToMilliseconds(DEFAULT_WORK_DURATION);
+            workRemaining = DEFAULT_WORK_DURATION;
+            clearInterval(breakId);
+          } else {
+            await interaction.editReply(BreakTimer.render(breakRemaining));
           }
-        ])
-        .setColor(0xe8c170);
-      interaction.editReply({
-        embeds: [embed]
-      });
+        }, breakUpdate);
+      } else {
+        await interaction.editReply(WorkTimer.render(workRemaining));
+      }
+    }, workUpdate);
+    const session: Session = {
+      sessionOwer: interaction.user,
+      sessionMembers: null,
+      intervalId: workId,
+      interaction: interaction,
+      workDuraiton: minutesToMilliseconds(DEFAULT_WORK_DURATION),
+      breakDuration: minutesToMilliseconds(DEFAULT_BREAK_DURATION)
     };
-    const intervalId: any = setInterval(async () => {
-      session.workInterval -= updateInterval;
-      minutes = millisecondsToMinutes(session.workInterval);
-      if (minutes == 0) {
-        console.log("Break interval has been reached!");
-        // TODO: add break interval
-      }
-      interaction.editReply({
-        components: [row],
-        embeds: [setWorkInterval(embed, minutes)],
-        files: [`media\\exported\\poom${minutes}.png`]
-      });
-    }, 1000);
-    client.on("interactionCreate", async (innerInteraction: Interaction) => {
-      if (!innerInteraction.isButton()) return;
-      const customId: string = innerInteraction.customId;
-      if (customId == "pause") {
-        // TODO: add pasue functionality
-        console.log("paused");
-      } else if (customId == "finish") {
-        finishSession(intervalId);
-      }
-    });
+    SessionStore.set(interaction.user.id, session);
   }
 };
