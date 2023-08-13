@@ -22,4 +22,4 @@ jobs:
         with:
           reporter: github-check
           level: warning
-          eslint_flags: '**/*.{js,jsx}'
+          eslint_flags: '**/*.{js,ts}'
