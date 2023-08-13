@@ -1,8 +1,15 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": [
-    "eslint:recommended"
+  "ignorePatterns": [
+    "node_modules/",
+    "dist/",
+    "coverage/",
+    "docs/",
+    "scripts/",
+    "test/",
+    "webpack.config.js"
   ],
+  "extends": ["eslint:recommended"],
   "parserOptions": {
     "ecmaVersion": 2022,
     "sourceType": "module",
@@ -24,15 +31,8 @@
     ],
     "comma-spacing": "error",
     "comma-style": "error",
-    "curly": [
-      "error",
-      "multi-line",
-      "consistent"
-    ],
-    "dot-location": [
-      "error",
-      "property"
-    ],
+    "curly": ["error", "multi-line", "consistent"],
+    "dot-location": ["error", "property"],
     "handle-callback-err": "off",
     "keyword-spacing": "error",
     "max-nested-callbacks": [
@@ -64,21 +64,12 @@
     "no-shadow": [
       "error",
       {
-        "allow": [
-          "err",
-          "resolve",
-          "reject"
-        ]
+        "allow": ["err", "resolve", "reject"]
       }
     ],
-    "no-trailing-spaces": [
-      "error"
-    ],
+    "no-trailing-spaces": ["error"],
     "no-var": "error",
-    "object-curly-spacing": [
-      "error",
-      "always"
-    ],
+    "object-curly-spacing": ["error", "always"],
     "prefer-const": "error",
     "space-before-blocks": "error",
     "space-before-function-paren": [
@@ -94,13 +85,7 @@
     "space-unary-ops": "error",
     "spaced-comment": "off",
     "yoda": "error",
-    "indent": [
-      "error",
-      2
-    ],
-    "semi": [
-      "error",
-      "always"
-    ]
+    "indent": ["error", 2],
+    "semi": ["error", "always"]
   }
 }

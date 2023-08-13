@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const client = new Client({
-  intents: ["Guilds", "GuildMessages"],
+  intents: ["Guilds", "GuildMessages"]
 });
 
 ready(client);

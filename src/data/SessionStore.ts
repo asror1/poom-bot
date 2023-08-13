@@ -1,3 +1,4 @@
-import { Session } from "@interfaces/Session";
+import { Snowflake } from "discord.js";
+import { PomodoroTimer } from "../PomodoroTimer";
 
-export const SessionStore = new Map<string, Session>();
+export const sessionStore = new Map<Snowflake, PomodoroTimer>();
