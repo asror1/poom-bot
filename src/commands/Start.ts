@@ -1,6 +1,6 @@
 import { CommandInteraction, Client } from "discord.js";
 import { SlashCommand } from "@interfaces/index";
-import { sessionStore } from "@data/sessionStore";
+import { sessionStore } from "@data/SessionStore";
 import { PomodoroTimer } from "src/PomodoroTimer";
 
 export const Start: SlashCommand = {

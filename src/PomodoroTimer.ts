@@ -6,7 +6,8 @@ import {
   ActionRowBuilder,
   MessageActionRowComponentBuilder,
   CommandInteraction,
-  User
+  User,
+  ButtonInteraction
 } from "discord.js";
 import { PomodoroSession } from "./types/PomodoroSession";
 
@@ -19,6 +20,7 @@ export class PomodoroTimer {
   tickRate: number;
   defaultButtonRow: ActionRowBuilder<MessageActionRowComponentBuilder>;
   pausedButtonRow: ActionRowBuilder<MessageActionRowComponentBuilder>;
+  buttonHandlers: Map<string, (interaction: ButtonInteraction) => void> = new Map();
   #minToMillis = (minutes: number): number => minutes * 60 * 1000;
 
   constructor({
@@ -37,12 +39,15 @@ export class PomodoroTimer {
     this.breakDuration = Math.round(b);
     this.interaction = interaction;
     this.companinions = companinions;
+    this.buttonHandlers = new Map();
 
     const finishButton: ButtonBuilder = new ButtonBuilder()
       .setCustomId("finish")
       .setLabel("Finish")
       .setEmoji("🏁")
       .setStyle(ButtonStyle.Primary);
+
+    this.buttonHandlers.set("finish", this.stop);
 
     const pauseButton: ButtonBuilder = new ButtonBuilder()
       .setCustomId("pause")
@@ -64,6 +69,17 @@ export class PomodoroTimer {
       finishButton,
       resumeButton
     );
+  }
+  stop(_interaction: ButtonInteraction): void {
+    this.interaction.editReply({
+      content: "Pomodoro session finished!",
+      components: [],
+      files: []
+    });
+    setTimeout(() => {
+      this.interaction.deleteReply();
+    }, this.#minToMillis(1));
+    clearInterval(this.intervalId);
   }
 
   getWorkView(timeRemaining: number): InteractionReplyOptions {
