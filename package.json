@@ -4,8 +4,9 @@
   "description": "Poom, lets you set up pomodoro timers with customizable intervals and rewards.",
   "scripts": {
     "test": "jest --watch --coverage --verbose",
-    "start": "ts-node -r tsconfig-paths/register src/Bot.ts",
-    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/Bot.ts",
+    "start": "ts-node -r tsconfig-paths/register src/Bot.ts dev",
+    "deploy": "ts-node -r tsconfig-paths/register src/Bot.ts prod",
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/Bot.ts dev",
     "format": "prettier --write \"**/*.{js,ts,json}\"",
     "lint": "eslint --fix \"**/*.{js,ts}\""
   },
