@@ -6,7 +6,6 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 (async () => {
   try {
-    console.log(process.env.ID);
     const data = await rest.get(Routes.applicationCommands(process.env.ID));
 
     console.log("\n");

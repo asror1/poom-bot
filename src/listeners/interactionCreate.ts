@@ -20,8 +20,9 @@ export const interactionCreate = (client: Client): void => {
         // TODO: handle when user has an active session, and starts another one
         console.log("User has an active session");
       }
-
-      slashCommand.execute(client, interaction);
+      else {
+        slashCommand.execute(client, interaction);
+      }
     } else if (interaction.isButton()) {
       const pomodoroTimer: Maybe<PomodoroTimer> = sessionStore.get(interaction.user.id);
       if (!pomodoroTimer) {

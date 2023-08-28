@@ -22,13 +22,11 @@ _Poom_ bot is your number one helper when it comes to employing the pomodoro tec
 
 ### Product Backlog
 
-- [ ] Export 60 minutes of break timer graphics
-- [ ] Create different profiles for development environment, and for testing and for production
-- [ ] Unit tests
-- [x] Add **finish button** functionality
-- [x] Add **pause button** functionality
+- [ ] Add **finish button** functionality
+- [ ] Add **pause button** functionality
+- [ ] Add finish functionality as a slash command
 - [ ] Ability to customize session
   - Change default work or break duration
   - Start off with the break instead of work period
-- [x] Remove the support of second precision in timers
-- [x] Change **break timer** graphics to be more _colorful_
+- [ ] Remove the support of second precision in timers
+- [ ] Change **break timer** graphics to be more _colorful_

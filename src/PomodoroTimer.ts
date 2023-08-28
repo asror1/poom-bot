@@ -10,6 +10,10 @@ import {
   ButtonInteraction
 } from "discord.js";
 import { PomodoroSession } from "./types/PomodoroSession";
+import dotenv from "dotenv";
+
+dotenv.config();
+dotenv.config({ path: `.env.${process.argv[2]}` });
 
 // TODO: improve this code structure, we can probably modularize this better
 export class PomodoroTimer {
@@ -19,7 +23,7 @@ export class PomodoroTimer {
   breakDuration: number;
   readonly interaction: CommandInteraction;
   readonly companinions: User[] | null;
-  readonly tickRate: number = this.#minToMillis(0.05);
+  readonly tickRate: number;
   buttonRow: ActionRowBuilder<MessageActionRowComponentBuilder>;
   buttonHandlers: Map<string, (interaction: ButtonInteraction) => void> = new Map();
   workDone: number;
@@ -37,6 +41,7 @@ export class PomodoroTimer {
     if (w < 1 || b < 1) {
       throw new Error("Duration must be at least 1 minute");
     }
+    this.tickRate = this.#minToMillis(parseFloat(process.env.MINUTE || "1"));
     this.workDone = 0;
     this.workDuration = Math.round(w);
     this.timeRemaining = this.workDuration;
@@ -90,8 +95,7 @@ export class PomodoroTimer {
         .setColor(0xbe772b)
         .setTitle(`Session Paused`)
         .setDescription(
-          `\` ${this.timeRemaining} ${
-            this.timeRemaining > 1 ? "minutes" : "minute"
+          `\` ${this.timeRemaining} ${this.timeRemaining > 1 ? "minutes" : "minute"
           } \` remaining`
         );
       if (this.isBreak) {
