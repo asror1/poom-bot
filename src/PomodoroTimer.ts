@@ -17,7 +17,7 @@ dotenv.config({ path: `.env.${process.argv[2]}` });
 
 // TODO: improve this code structure, we can probably modularize this better
 export class PomodoroTimer {
-  #minToMillis = (minutes: number): number => minutes * 60 * 1000;
+  private minToMillis = (minutes: number): number => minutes * 60 * 1000;
   intervalId: any;
   workDuration: number;
   breakDuration: number;
@@ -41,7 +41,7 @@ export class PomodoroTimer {
     if (w < 1 || b < 1) {
       throw new Error("Duration must be at least 1 minute");
     }
-    this.tickRate = this.#minToMillis(parseFloat(process.env.MINUTE || "1"));
+    this.tickRate = this.minToMillis(parseFloat(process.env.MINUTE || "1"));
     this.workDone = 0;
     this.workDuration = Math.round(w);
     this.timeRemaining = this.workDuration;
@@ -69,7 +69,7 @@ export class PomodoroTimer {
       });
       setTimeout(() => {
         this.interaction.deleteReply();
-      }, this.#minToMillis(1));
+      }, this.minToMillis(1));
       clearInterval(this.intervalId);
     });
 
