@@ -7,6 +7,7 @@ import {
   ButtonBuilder,
   ButtonStyle
 } from "discord.js";
+import { ImageService } from "./ImageService";
 
 const finishButton = new ButtonBuilder()
   .setCustomId("finish")
@@ -30,6 +31,7 @@ export class PomodoroView implements InteractionReplyOptions {
   files?: Array<BufferResolvable>;
 
   private readonly getEmbed: (time: number) => EmbedBuilder;
+  private readonly imageService: ImageService;
 
   constructor({ name, color }: { name: string; color: number }) {
     this.ephemeral = true;
