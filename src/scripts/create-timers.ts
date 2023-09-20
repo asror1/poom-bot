@@ -67,9 +67,6 @@ type TimerNumber = {
       log("INFO", `Found ${foregrounds.length} foregrounds`);
       backgrounds.forEach((bg) => {
         const dir: string = `${COMPOSED_TIMER_PATH}\\${bg.type}`;
-        if (!fs.existsSync(dir)) {
-          fs.mkdirSync(dir);
-        }
         foregrounds.forEach((fg) => {
           const out: string = `${dir}\\final${fg.time}.png`;
 

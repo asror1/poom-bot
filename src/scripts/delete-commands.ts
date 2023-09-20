@@ -10,11 +10,11 @@ if (!process.env.TOKEN) {
 const rest: REST = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 (async () => {
+  if (!process.env.ID) {
+    log("ERROR", "No discord application id provided.");
+    return;
+  }
   try {
-    if (!process.env.ID) {
-      log("ERROR", "No discord application id provided.");
-      return;
-    }
     const data: any = await rest.get(Routes.applicationCommands(process.env.ID));
 
     for (const command of data) {

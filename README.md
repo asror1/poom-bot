@@ -19,4 +19,3 @@ _Poom_ bot is your number one helper when it comes to employing the pomodoro tec
 
 - Join other people's sessions
 - Rewards
-
