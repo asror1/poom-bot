@@ -1,4 +1,4 @@
 export type Image = {
-  absolutePath: string;
-  fileName: string;
-}
+  path: string;
+  name: string;
+};

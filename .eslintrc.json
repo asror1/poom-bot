@@ -5,7 +5,6 @@
     "dist/",
     "coverage/",
     "docs/",
-    "scripts/",
     "test/",
     "webpack.config.js"
   ],

@@ -1,36 +1,53 @@
 import { Client, Interaction } from "discord.js";
-import commands from "@commands/index";
 import { Maybe } from "../types/Maybe";
-import { SlashCommand } from "@interfaces/index";
+import { Session } from "..//types/Session";
 import { sessionStore } from "@data/SessionStore";
-import { PomodoroTimer } from "src/PomodoroTimer";
+import { Timer } from "../Timer";
+import dotenv from "dotenv";
+dotenv.config();
+dotenv.config({ path: `.env.${process.argv[2]}` });
 
 export const interactionCreate = (client: Client): void => {
   client.on("interactionCreate", async (interaction: Interaction) => {
     if (interaction.isCommand() || interaction.isChatInputCommand()) {
-      const slashCommand: Maybe<SlashCommand> = commands.find(
-        (c) => c.name === interaction.commandName
-      );
-
-      if (!slashCommand) {
-        interaction.followUp({ content: "An error has occurred" });
-        return;
-      }
       if (sessionStore.has(interaction.user.id)) {
         // TODO: handle when user has an active session, and starts another one
         console.log("User has an active session");
       }
-      else {
-        slashCommand.execute(client, interaction);
+      if (process.env.WORK && process.env.REST) {
+        const work: any = interaction.options.get("work");
+        const rest: any = interaction.options.get("rest");
+        const startWith: any = interaction.options.get("rest_first");
+        console.log(work);
+        console.log(rest);
+        const session: Session = {
+          interaction,
+          companions: null,
+          duration: {
+            work: work || parseInt(process.env.WORK),
+            rest: rest || parseInt(process.env.REST)
+          },
+          startWith: startWith && "rest" || "work"
+
+        };
+        const timer: Timer = new Timer(session);
+        timer.start();
+        sessionStore.set(interaction.user.id, timer);
       }
     } else if (interaction.isButton()) {
-      const pomodoroTimer: Maybe<PomodoroTimer> = sessionStore.get(interaction.user.id);
-      if (!pomodoroTimer) {
+      const timer: Maybe<Timer> = sessionStore.get(interaction.user.id);
+      if (!timer) {
         // Since there is no other way that a button interaction would be
         // registered outside of a pomodoro session, this should never happen
         throw new Error("Pomodoro timer not found for user " + interaction.user);
       }
-      pomodoroTimer.buttonHandlers.get(interaction.customId)?.(interaction);
+      if (interaction.customId === "finish") {
+        timer.finish();
+      } else if (interaction.customId === "pause") {
+        timer.pause();
+      } else if (interaction.customId === "resume") {
+        timer.resume();
+      }
     }
   });
 };
