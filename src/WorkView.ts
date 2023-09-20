@@ -6,27 +6,29 @@ import {
   finishButton,
   pauseButton,
   getTimeRemaining,
-  getTimerImage
+  getComposedImage
 } from "./utils";
 import { Maybe } from "./types/Maybe";
 import { TimerType } from "./types/TimerType";
 
 export class WorkView implements DynamicView {
   readonly title: string = "Grind Time!";
-  readonly color: number = 0xe8c170;
   readonly type: TimerType = "work";
+  readonly template: EmbedBuilder;
   components: ActionRowBuilder<ButtonBuilder>[];
   ephemeral: boolean = true;
   embeds: EmbedBuilder[];
   files: BufferResolvable[];
   render(timeRemaining: number): void {
-    const image: Maybe<Image> = getTimerImage(this.type, timeRemaining);
+    const image: Maybe<Image> = getComposedImage({
+      type: this.type,
+      time: timeRemaining
+    });
     if (!image) {
       throw new Error(`No image found for ${this.type} view with time ${timeRemaining}`);
     }
     this.embeds = [
-      new EmbedBuilder()
-        .setColor(this.color)
+      this.template
         .setFields([
           {
             name: this.title,
@@ -38,8 +40,12 @@ export class WorkView implements DynamicView {
     this.files = [image.path];
   }
 
-  constructor(initialTime: number) {
-    const image: Maybe<Image> = getTimerImage(this.type, initialTime);
+  constructor(template: EmbedBuilder, initialTime: number) {
+    this.template = template;
+    const image: Maybe<Image> = getComposedImage({
+      type: this.type,
+      time: initialTime
+    });
     if (!image) {
       throw new Error(`No image found for ${this.type} view with time ${initialTime}`);
     }
@@ -47,8 +53,7 @@ export class WorkView implements DynamicView {
       new ActionRowBuilder<ButtonBuilder>().addComponents(finishButton, pauseButton)
     ];
     this.embeds = [
-      new EmbedBuilder()
-        .setColor(this.color)
+      this.template
         .setFields([
           {
             name: this.title,

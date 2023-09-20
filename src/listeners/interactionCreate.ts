@@ -30,6 +30,7 @@ export const interactionCreate = (client: Client): void => {
 
         };
         const timer: Timer = new Timer(session);
+        log("INFO", `Starting session for ${interaction.user.username}`);
         timer.start();
         sessionStore.set(interaction.user.id, timer);
       }
@@ -42,6 +43,7 @@ export const interactionCreate = (client: Client): void => {
       }
       if (interaction.customId === "finish") {
         timer.finish();
+        log("INFO", `Finishing session for ${interaction.user.username}`);
       } else if (interaction.customId === "pause") {
         timer.pause();
       } else if (interaction.customId === "resume") {

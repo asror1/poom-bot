@@ -1,27 +1,29 @@
 import { ActionRowBuilder, BufferResolvable, ButtonBuilder, EmbedBuilder } from "discord.js";
 import { Image } from "./types/Image";
 import { DynamicView } from "@interfaces/DynamicView";
-import { getTimerImage } from "./utils";
+import { getComposedImage } from "./utils";
 import { getAttachmentUrl, finishButton, pauseButton, getTimeRemaining } from "./utils";
 import { Maybe } from "./types/Maybe";
 import { TimerType } from "./types/TimerType";
 
 export class RestView implements DynamicView {
   readonly title: string = "Rest Time!";
-  readonly color: number = 0xc09473;
   readonly type: TimerType = "rest";
+  readonly template: EmbedBuilder;
   components: ActionRowBuilder<ButtonBuilder>[];
   ephemeral: boolean = true;
   embeds: EmbedBuilder[];
   files: BufferResolvable[];
   render(timeRemaining: number): void {
-    const image: Maybe<Image> = getTimerImage(this.type, timeRemaining);
+    const image: Maybe<Image> = getComposedImage({
+      type: this.type,
+      time: timeRemaining
+    });
     if (!image) {
       throw new Error(`No image found for ${this.type} view with time ${timeRemaining}`);
     }
     this.embeds = [
-      new EmbedBuilder()
-        .setColor(this.color)
+      this.template
         .setFields([
           {
             name: this.title,
@@ -33,15 +35,20 @@ export class RestView implements DynamicView {
     this.files = [image.path];
   }
 
-  constructor(initialTime: number) {
-    const image: Maybe<Image> = getTimerImage(this.type, initialTime);
+  constructor(template: EmbedBuilder, initialTime: number) {
+    this.template = template;
+    const image: Maybe<Image> = getComposedImage({
+      type: this.type,
+      time: initialTime
+    });
     if (!image) {
       throw new Error(`No image found for ${this.type} view with time ${initialTime}`);
     }
-    this.components = [new ActionRowBuilder<ButtonBuilder>().addComponents(finishButton, pauseButton)];
+    this.components = [
+      new ActionRowBuilder<ButtonBuilder>().addComponents(finishButton, pauseButton)
+    ];
     this.embeds = [
-      new EmbedBuilder()
-        .setColor(this.color)
+      this.template
         .setFields([
           {
             name: this.title,

@@ -5,6 +5,7 @@ import { PausedView } from "./PausedView";
 import { WorkView } from "./WorkView";
 import { RestView } from "./RestView";
 import dotenv from "dotenv";
+import { EmbedBuilder } from "discord.js";
 
 dotenv.config();
 dotenv.config({ path: `.env.${process.argv[2]}` });
@@ -16,6 +17,7 @@ export class Timer {
   timeRemaining: number;
   resting: boolean;
   readonly refresh: number = minToMillis(parseFloat(process.env.MINUTE || "1")); // 1 minute
+  readonly viewEmbedTemplate: EmbedBuilder;
   private readonly session: Session;
 
   constructor(session: Session) {
@@ -36,18 +38,35 @@ export class Timer {
     session.duration.rest = rest;
 
     this.session = session;
+
+    this.viewEmbedTemplate = new EmbedBuilder()
+      .setAuthor({
+        name: `${session.interaction.user.displayName}'s Pomodoro Session`,
+        iconURL: session.interaction?.user.avatarURL() as string | undefined
+      })
+      .setFooter({
+        text: "© 2023 poom-bot. All rights reserved.",
+        iconURL:
+          "https://media.discordapp.net/attachments/897902979619893288/1154167154040643645/poom_icon.png"
+      })
+      .setURL("https://github.com/asror1/poom-bot")
+      .setColor(0xc09473);
   }
 
   async finish(): Promise<void> {
-    this.session.interaction.user.send(new FinalView(this.workDone));
-    setTimeout(() => {
-      this.session.interaction.deleteReply();
-    }, minToMillis(1));
+    this.session.interaction.user.send(
+      new FinalView(this.session.interaction.createdTimestamp, this.workDone)
+    );
+    this.session.interaction.deleteReply();
     clearInterval(this.intervalId);
   }
-  async pause(): Promise<void> {
+  pause(): void {
     this.session.interaction.editReply(
-      new PausedView((this.resting && "rest") || "work", this.timeRemaining)
+      new PausedView(
+        this.viewEmbedTemplate,
+        (this.resting && "rest") || "work",
+        this.timeRemaining
+      )
     );
     clearInterval(this.intervalId);
   }
@@ -63,7 +82,7 @@ export class Timer {
   }
 
   private async startWork(): Promise<void> {
-    const view: WorkView = new WorkView(this.timeRemaining);
+    const view: WorkView = new WorkView(this.viewEmbedTemplate, this.timeRemaining);
     if (this.session.interaction.replied) {
       await this.session.interaction.editReply(view);
     } else {
@@ -84,7 +103,7 @@ export class Timer {
   }
 
   private async startRest(): Promise<void> {
-    const view: RestView = new RestView(this.timeRemaining);
+    const view: RestView = new RestView(this.viewEmbedTemplate, this.timeRemaining);
     if (this.session.interaction.replied) {
       await this.session.interaction.editReply(view);
     } else {

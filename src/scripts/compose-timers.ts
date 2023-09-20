@@ -2,7 +2,7 @@ import sharp from "sharp";
 import fs from "fs";
 import { TimerType } from "src/types/TimerType";
 import { Image } from "src/types/Image";
-import { log, COMPOSED_TIMER_PATH, EXPORTED_IMAGE_PATH } from "src/utils";
+import { log, COMPOSED_IMAGE_PATH, EXPORTED_IMAGE_PATH } from "src/utils";
 
 function create(bg: string, fg: string, out: string): void {
   sharp(bg)
@@ -15,13 +15,14 @@ function create(bg: string, fg: string, out: string): void {
       if (err) {
         log("ERROR", err);
       } else if (info) {
-        log("INFO", info);
+        log("DEBUG", `${out} ${JSON.stringify(info)}`);
       }
     });
 }
 
 type TimerBg = {
   type: TimerType;
+  paused: boolean;
   image: Image;
 };
 type TimerNumber = {
@@ -49,28 +50,35 @@ type TimerNumber = {
             time: parseInt(matched[0])
           });
         } else if (/.*timer.*/.test(file)) {
-          const matched: RegExpMatchArray | null = file.match(/(work|rest)/);
-          if (!matched) {
+          const type: RegExpMatchArray | null = file.match(/(work|rest)/);
+          const paused: boolean = /.*paused.*/.test(file);
+          if (!type) {
             log("ERROR", `No type found in file name (${file})`);
             return;
           }
           backgrounds.push({
-            type: matched[0] as TimerType,
+            type: type[0] as TimerType,
             image: {
               path,
               name: file
-            }
+            },
+            paused
           });
         }
       });
       log("INFO", `Found ${backgrounds.length} backgrounds`);
       log("INFO", `Found ${foregrounds.length} foregrounds`);
       backgrounds.forEach((bg) => {
-        const dir: string = `${COMPOSED_TIMER_PATH}\\${bg.type}`;
+        const dir: string = `${COMPOSED_IMAGE_PATH}/${bg.paused ? "paused" : "regular"}/${
+          bg.type
+        }`;
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true });
+        }
         foregrounds.forEach((fg) => {
-          const out: string = `${dir}\\final${fg.time}.png`;
+          const out: string = `${dir}/${fg.time}.png`;
 
-          log("INFO", "Creating " + out);
+          log("DEBUG", "Creating " + out);
           create(bg.image.path, fg.path, out);
         });
       });

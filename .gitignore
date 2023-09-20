@@ -22,3 +22,4 @@ config.json
 log.*
 *.log.*
 src/timers/**
+media/composed/**

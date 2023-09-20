@@ -3,7 +3,7 @@ import {
   finishButton,
   getAttachmentUrl,
   resumeButton,
-  getTimerImage,
+  getComposedImage,
   getTimeRemaining
 } from "./utils";
 import { ActionRowBuilder, BufferResolvable, ButtonBuilder, EmbedBuilder } from "discord.js";
@@ -13,22 +13,26 @@ import { TimerType } from "./types/TimerType";
 
 export class PausedView implements StaticView {
   readonly title: string = "Session Paused";
-  readonly color: number = 0xbe772b;
+  readonly template: EmbedBuilder;
   components: ActionRowBuilder<ButtonBuilder>[];
   ephemeral: boolean = true;
   files: BufferResolvable[];
   embeds: EmbedBuilder[];
-  constructor(pausedOn: TimerType, pausedTime: number) {
+  constructor(template: EmbedBuilder, pausedOn: TimerType, pausedTime: number) {
+    this.template = template;
     this.components = [
       new ActionRowBuilder<ButtonBuilder>().addComponents(finishButton, resumeButton)
     ];
-    const image: Maybe<Image> = getTimerImage(pausedOn, pausedTime);
+    const image: Maybe<Image> = getComposedImage({
+      type: pausedOn,
+      time: pausedTime,
+      paused: true
+    });
     if (!image) {
       throw new Error(`No image found for ${pausedOn} view with time ${pausedTime}`);
     }
     this.embeds = [
-      new EmbedBuilder()
-        .setColor(this.color)
+      this.template
         .setFields({
           name: this.title,
           value: getTimeRemaining(pausedTime)
