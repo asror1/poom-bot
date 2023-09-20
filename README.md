@@ -19,14 +19,3 @@ _Poom_ bot is your number one helper when it comes to employing the pomodoro tec
 
 - Join other people's sessions
 - Rewards
-
-### Product Backlog
-
-- [ ] Add **finish button** functionality
-- [ ] Add **pause button** functionality
-- [ ] Add finish functionality as a slash command
-- [ ] Ability to customize session
-  - Change default work or break duration
-  - Start off with the break instead of work period
-- [ ] Remove the support of second precision in timers
-- [ ] Change **break timer** graphics to be more _colorful_

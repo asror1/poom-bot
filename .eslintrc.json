@@ -5,7 +5,6 @@
     "dist/",
     "coverage/",
     "docs/",
-    "scripts/",
     "test/",
     "webpack.config.js"
   ],
@@ -47,7 +46,7 @@
         "max": 2
       }
     ],
-    "no-console": "off",
+    "no-console": "warn",
     "no-empty-function": "error",
     "no-floating-decimal": "error",
     "no-inline-comments": "off",
@@ -72,14 +71,7 @@
     "object-curly-spacing": ["error", "always"],
     "prefer-const": "error",
     "space-before-blocks": "error",
-    "space-before-function-paren": [
-      "error",
-      {
-        "anonymous": "never",
-        "named": "never",
-        "asyncArrow": "always"
-      }
-    ],
+    "space-before-function-paren": "off",
     "space-in-parens": "error",
     "space-infix-ops": "error",
     "space-unary-ops": "error",

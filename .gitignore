@@ -6,7 +6,7 @@ Session.vim
 node_modules/
 package-lock.json
 
-# Artwork
+# Graphics
 *.aseprite
 *.pur
 
@@ -16,3 +16,10 @@ coverage/
 # Private
 config.json
 .env
+
+# Irrelevant
+*.log
+log.*
+*.log.*
+src/timers/**
+media/composed/**

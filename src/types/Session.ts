@@ -1,10 +1,11 @@
 import { CommandInteraction, User } from "discord.js";
 
-export type PomodoroSession = {
+export type Session = {
   interaction: CommandInteraction;
-  companinions: User[] | null;
+  companions: User[] | null;
   duration: {
     work: number;
-    break: number;
+    rest: number;
   };
+  startWith: "work" | "rest";
 };

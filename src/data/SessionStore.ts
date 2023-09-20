@@ -1,4 +1,4 @@
 import { Snowflake } from "discord.js";
-import { PomodoroTimer } from "../PomodoroTimer";
+import { Timer } from "../Timer";
 
-export const sessionStore = new Map<Snowflake, PomodoroTimer>();
+export const sessionStore = new Map<Snowflake, Timer>();

@@ -4,9 +4,14 @@
   "description": "Poom, lets you set up pomodoro timers with customizable intervals and rewards.",
   "scripts": {
     "test": "jest --watch --coverage --verbose",
-    "start": "ts-node -r tsconfig-paths/register src/Bot.ts dev",
-    "deploy": "ts-node -r tsconfig-paths/register src/Bot.ts prod",
-    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/Bot.ts dev",
+    "start": "npm run clean-log:win && ts-node -r tsconfig-paths/register src/Bot.ts dev",
+    "deploy": "npm run clean-log:unix && ts-node -r tsconfig-paths/register src/Bot.ts prod",
+    "dev": "npm run clean-log:win && nodemon --exec ts-node -r tsconfig-paths/register src/Bot.ts dev",
+    "images": "ts-node -r tsconfig-paths/register src/scripts/compose-timers.ts",
+    "clean-log:win": "del log.*",
+    "clean-log:unix": "rm log.*",
+    "del-comms": "ts-node -r tsconfig-paths/register src/scripts/delete-commands.ts",
+    "dep-comms": "ts-node -r tsconfig-paths/register src/scripts/deploy-commands.ts",
     "format": "prettier --write \"**/*.{js,ts,json}\"",
     "lint": "eslint --fix \"**/*.{js,ts}\""
   },
@@ -16,6 +21,7 @@
     "discord.js": "^14.8.0",
     "dotenv": "^16.3.1",
     "nodemon": "^2.0.19",
+    "sharp": "^0.32.5",
     "tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
