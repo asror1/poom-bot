@@ -1,9 +1,10 @@
 import { Client, Interaction } from "discord.js";
 import { Maybe } from "../types/Maybe";
-import { Session } from "..//types/Session";
+import { Session } from "../types/Session";
 import { sessionStore } from "@data/SessionStore";
 import { Timer } from "../Timer";
 import dotenv from "dotenv";
+import { log } from "src/utils";
 dotenv.config();
 dotenv.config({ path: `.env.${process.argv[2]}` });
 
@@ -12,14 +13,12 @@ export const interactionCreate = (client: Client): void => {
     if (interaction.isCommand() || interaction.isChatInputCommand()) {
       if (sessionStore.has(interaction.user.id)) {
         // TODO: handle when user has an active session, and starts another one
-        console.log("User has an active session");
+        log("ERROR", `User ${interaction.user.username} already has an active session`);
       }
       if (process.env.WORK && process.env.REST) {
         const work: any = interaction.options.get("work");
         const rest: any = interaction.options.get("rest");
         const startWith: any = interaction.options.get("rest_first");
-        console.log(work);
-        console.log(rest);
         const session: Session = {
           interaction,
           companions: null,
