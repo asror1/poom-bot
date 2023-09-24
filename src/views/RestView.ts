@@ -1,10 +1,7 @@
 import { ActionRowBuilder, BufferResolvable, ButtonBuilder, EmbedBuilder } from "discord.js";
-import { Image } from "./types/Image";
-import { DynamicView } from "@interfaces/DynamicView";
-import { getComposedImage } from "./utils";
-import { getAttachmentUrl, finishButton, pauseButton, getTimeRemaining } from "./utils";
-import { Maybe } from "./types/Maybe";
-import { TimerType } from "./types/TimerType";
+import { TimerType } from "@types";
+import { DynamicView, finishButton, pauseButton } from "@views";
+import { ImageAttachment, Maybe, remainingToString, getImageAttachment } from "@utils";
 
 export class RestView implements DynamicView {
   readonly title: string = "Rest Time!";
@@ -15,7 +12,7 @@ export class RestView implements DynamicView {
   embeds: EmbedBuilder[];
   files: BufferResolvable[];
   render(timeRemaining: number): void {
-    const image: Maybe<Image> = getComposedImage({
+    const image: Maybe<ImageAttachment> = getImageAttachment({
       type: this.type,
       time: timeRemaining
     });
@@ -27,17 +24,17 @@ export class RestView implements DynamicView {
         .setFields([
           {
             name: this.title,
-            value: getTimeRemaining(timeRemaining)
+            value: remainingToString(timeRemaining)
           }
         ])
-        .setImage(getAttachmentUrl(image.name))
+        .setImage(image.url)
     ];
     this.files = [image.path];
   }
 
   constructor(template: EmbedBuilder, initialTime: number) {
     this.template = template;
-    const image: Maybe<Image> = getComposedImage({
+    const image: Maybe<ImageAttachment> = getImageAttachment({
       type: this.type,
       time: initialTime
     });
@@ -52,10 +49,10 @@ export class RestView implements DynamicView {
         .setFields([
           {
             name: this.title,
-            value: getTimeRemaining(initialTime)
+            value: remainingToString(initialTime)
           }
         ])
-        .setImage(getAttachmentUrl(image.name))
+        .setImage(image.url)
     ];
     this.files = [image.path];
   }

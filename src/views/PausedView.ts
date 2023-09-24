@@ -1,15 +1,7 @@
-import { StaticView } from "@interfaces/StaticView";
-import {
-  finishButton,
-  getAttachmentUrl,
-  resumeButton,
-  getComposedImage,
-  getTimeRemaining
-} from "./utils";
+import { StaticView, finishButton, resumeButton } from "@views";
+import { getImageAttachment, remainingToString, Maybe, ImageAttachment } from "@utils";
 import { ActionRowBuilder, BufferResolvable, ButtonBuilder, EmbedBuilder } from "discord.js";
-import { Maybe } from "./types/Maybe";
-import { Image } from "./types/Image";
-import { TimerType } from "./types/TimerType";
+import { TimerType } from "@types";
 
 export class PausedView implements StaticView {
   readonly title: string = "Session Paused";
@@ -23,7 +15,7 @@ export class PausedView implements StaticView {
     this.components = [
       new ActionRowBuilder<ButtonBuilder>().addComponents(finishButton, resumeButton)
     ];
-    const image: Maybe<Image> = getComposedImage({
+    const image: Maybe<ImageAttachment> = getImageAttachment({
       type: pausedOn,
       time: pausedTime,
       paused: true
@@ -35,9 +27,9 @@ export class PausedView implements StaticView {
       this.template
         .setFields({
           name: this.title,
-          value: getTimeRemaining(pausedTime)
+          value: remainingToString(pausedTime)
         })
-        .setImage(getAttachmentUrl(image.name))
+        .setImage(image.url)
     ];
     this.files = [image.path];
   }

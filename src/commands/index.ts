@@ -1,2 +1,3 @@
 import { start } from "./start";
-export default [start];
+import { feedback } from "./feedback";
+export default [start, feedback];

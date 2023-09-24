@@ -1,9 +1,9 @@
-import { StaticView } from "@interfaces/StaticView";
+import { StaticView } from "@views";
 import { ActionRowBuilder, BufferResolvable, ButtonBuilder, EmbedBuilder } from "discord.js";
 
 export class FinalView implements StaticView {
   components: ActionRowBuilder<ButtonBuilder>[];
-  ephemeral: boolean = true;
+  ephemeral: boolean = false;
   embeds: EmbedBuilder[];
   files: BufferResolvable[];
   constructor(createdTimestamp: number, workDone: number) {

@@ -1,8 +1,7 @@
 import sharp from "sharp";
 import fs from "fs";
-import { TimerType } from "src/types/TimerType";
-import { Image } from "src/types/Image";
-import { log, COMPOSED_IMAGE_PATH, EXPORTED_IMAGE_PATH } from "src/utils";
+import { TimerType } from "@types";
+import { logger, COMPOSED_IMAGE_PATH, EXPORTED_IMAGE_PATH, ImageAttachment } from "@utils";
 
 function create(bg: string, fg: string, out: string): void {
   sharp(bg)
@@ -13,9 +12,9 @@ function create(bg: string, fg: string, out: string): void {
     ])
     .toFile(out, (err, info) => {
       if (err) {
-        log("ERROR", err);
+        logger.error(err);
       } else if (info) {
-        log("DEBUG", `${out} ${JSON.stringify(info)}`);
+        logger.debug(`${out} ${JSON.stringify(info)}`);
       }
     });
 }
@@ -23,7 +22,7 @@ function create(bg: string, fg: string, out: string): void {
 type TimerBg = {
   type: TimerType;
   paused: boolean;
-  image: Image;
+  image: ImageAttachment;
 };
 type TimerNumber = {
   path: string;
@@ -33,16 +32,16 @@ type TimerNumber = {
 (function () {
   fs.readdir(EXPORTED_IMAGE_PATH, (err, files) => {
     if (err) {
-      log("ERROR", err);
+      logger.error(err);
     } else {
       const backgrounds: Array<TimerBg> = [];
       const foregrounds: Array<TimerNumber> = [];
       files.forEach((file) => {
-        const path: string = `${EXPORTED_IMAGE_PATH}\\${file}`;
+        const path: string = `${EXPORTED_IMAGE_PATH}/${file}`;
         if (/poom\d+\.png/.test(file)) {
           const matched: RegExpMatchArray | null = file.match(/\d+/);
           if (!matched) {
-            log("ERROR", `No number found in file name (${file})`);
+            logger.error(`No number found in file name (${file})`);
             return;
           }
           foregrounds.push({
@@ -53,21 +52,22 @@ type TimerNumber = {
           const type: RegExpMatchArray | null = file.match(/(work|rest)/);
           const paused: boolean = /.*paused.*/.test(file);
           if (!type) {
-            log("ERROR", `No type found in file name (${file})`);
+            logger.error(`No type found in file name (${file})`);
             return;
           }
           backgrounds.push({
             type: type[0] as TimerType,
             image: {
               path,
-              name: file
+              name: file,
+              url: ""
             },
             paused
           });
         }
       });
-      log("INFO", `Found ${backgrounds.length} backgrounds`);
-      log("INFO", `Found ${foregrounds.length} foregrounds`);
+      logger.info(`Found ${backgrounds.length} backgrounds`);
+      logger.info(`Found ${foregrounds.length} foregrounds`);
       backgrounds.forEach((bg) => {
         const dir: string = `${COMPOSED_IMAGE_PATH}/${bg.paused ? "paused" : "regular"}/${
           bg.type
@@ -78,10 +78,11 @@ type TimerNumber = {
         foregrounds.forEach((fg) => {
           const out: string = `${dir}/${fg.time}.png`;
 
-          log("DEBUG", "Creating " + out);
+          logger.debug("Creating " + out);
           create(bg.image.path, fg.path, out);
         });
       });
+      logger.info(`Created ${backgrounds.length * foregrounds.length} images`);
     }
   });
 })();
