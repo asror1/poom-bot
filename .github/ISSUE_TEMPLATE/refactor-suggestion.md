@@ -1,17 +1,17 @@
 ---
 name: Refactor Suggestion
-about: Repository / Code suggestion template
+about: Repository contents and structure improvement template
 title: "(refactor): Title describing the suggestion"
 labels: enhancement
 assignees: ''
 
 ---
 
-### Problem Statement
-Ex. "The `README` file is missing a banner"
+**Which part of the repository can be improved? Why?**
+Ex. "The pomodoro timer interface could be improved because it is not modular enough"
 
-### Benefit
-Ex. "The repository is more welcoming when there is a banner"
+**What will be the benefit of refactoring this part of the repository?**
+Ex. "The pomodoro timer code will be more readable and maintainable"
 
-### Potential Solution
-Ex. "Add a warm colored pixel art banner to `README`"
+**What are the potential steps to achieve this benefit?**
+Ex. "Extract some logic of the start method into `startWorkTimer` method and `startRestTimer` method"
