@@ -17,11 +17,12 @@
     "sourceMap": false,
     "baseUrl": ".",
     "paths": {
-      "@listeners/*": ["./src/listeners/*"],
-      "@data/*": ["./src/data/*"],
-      "@components/*": ["./src/components/*"],
-      "@commands/*": ["./src/commands/*"],
-      "@interfaces/*": ["./src/interfaces/*"]
+      "@listeners": ["./src/listeners"],
+      "@data": ["./src/data"],
+      "@types": ["./src/types"],
+      "@commands": ["./src/commands"],
+      "@views": ["./src/views"],
+      "@utils": ["./src/utils"]
     }
   },
   "files": ["src/Bot.ts"],

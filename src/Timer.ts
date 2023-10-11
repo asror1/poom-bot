@@ -1,22 +1,18 @@
-import { Session } from "./types/Session";
-import { minToMillis } from "./utils";
-import { FinalView } from "./FinalView";
-import { PausedView } from "./PausedView";
-import { WorkView } from "./WorkView";
-import { RestView } from "./RestView";
+import { minsToMs } from "@utils";
+import { FinalView, PausedView, RestView, WorkView, footer } from "@views";
+import { Session } from "./Session";
 import dotenv from "dotenv";
 import { EmbedBuilder } from "discord.js";
 
 dotenv.config();
 dotenv.config({ path: `.env.${process.argv[2]}` });
 
-// TODO: improve this code structure, we can probably modularize this better
 export class Timer {
   intervalId: any;
   workDone: number = 0;
   timeRemaining: number;
   resting: boolean;
-  readonly refresh: number = minToMillis(parseFloat(process.env.MINUTE || "1")); // 1 minute
+  readonly refresh: number = minsToMs(parseFloat(process.env.MINUTE || "1")); // 1 minute
   readonly viewEmbedTemplate: EmbedBuilder;
   private readonly session: Session;
 
@@ -44,11 +40,7 @@ export class Timer {
         name: `${session.interaction.user.displayName}'s Pomodoro Session`,
         iconURL: session.interaction?.user.avatarURL() as string | undefined
       })
-      .setFooter({
-        text: "© 2023 poom-bot. All rights reserved.",
-        iconURL:
-          "https://media.discordapp.net/attachments/897902979619893288/1154167154040643645/poom_icon.png"
-      })
+      .setFooter(footer)
       .setURL("https://github.com/asror1/poom-bot")
       .setColor(0xc09473);
   }
