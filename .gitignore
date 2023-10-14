@@ -6,9 +6,14 @@ Session.vim
 node_modules/
 package-lock.json
 
+# Typescript
+dist/
+
 # Graphics
 *.aseprite
 *.pur
+src/timers/**
+media/composed/**
 
 # Testing
 coverage/
@@ -17,9 +22,8 @@ coverage/
 config.json
 .env
 
-# Irrelevant
+# Logging
 *.log
 log.*
 *.log.*
-src/timers/**
-media/composed/**
+
