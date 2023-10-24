@@ -1,7 +1,4 @@
-import {
-  ApplicationCommandOptionType,
-  ChatInputCommandInteraction
-} from "discord.js";
+import { ApplicationCommandOptionType, ChatInputCommandInteraction } from "discord.js";
 import { sessionStore } from "@data";
 import { logger } from "@utils";
 import { Timer } from "src/Timer";
