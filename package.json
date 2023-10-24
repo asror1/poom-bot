@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest --watch --coverage --verbose",
     "start": "npm run clean:win && ts-node -r tsconfig-paths/register src/Bot.ts dev",
-    "deploy": "npm run del-comms && npm run clean:unix && ts-node -r tsconfig-paths/register src/Bot.ts prod",
+    "deploy": "npm run clean:unix && ts-node -r tsconfig-paths/register src/Bot.ts prod",
     "dev": "npm run clean:win && nodemon --exec ts-node -r tsconfig-paths/register src/Bot.ts dev",
     "images": "ts-node -r tsconfig-paths/register src/scripts/compose-images.ts",
     "clean:win": "del log.* || exit 0",
