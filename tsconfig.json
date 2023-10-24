@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "es5",
+    "module": "commonjs",
     "rootDir": "./src/",
     "outDir": "./dist/",
     "strict": true,
@@ -26,6 +27,6 @@
     }
   },
   "files": ["src/Bot.ts"],
-  "include": ["./**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }

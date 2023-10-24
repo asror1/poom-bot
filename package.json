@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest --watch --coverage --verbose",
     "start": "npm run clean:win && ts-node -r tsconfig-paths/register src/Bot.ts dev",
-    "deploy": "npm run del-comms && npm run clean:unix && ts-node -r tsconfig-paths/register src/Bot.ts prod",
+    "deploy": "npm run clean:unix && ts-node -r tsconfig-paths/register src/Bot.ts prod",
     "dev": "npm run clean:win && nodemon --exec ts-node -r tsconfig-paths/register src/Bot.ts dev",
     "images": "ts-node -r tsconfig-paths/register src/scripts/compose-images.ts",
     "clean:win": "del log.* || exit 0",
@@ -17,7 +17,7 @@
   "author": "asror1",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.8.0",
+    "discord.js": "^14.13.0",
     "dotenv": "^16.3.1",
     "nodemon": "^2.0.19",
     "sharp": "^0.32.5",
@@ -30,6 +30,6 @@
     "jest": "^29.5.0",
     "prettier": "^3.0.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   }
 }
